@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glass Demo</title>
+    <title>Memo Indexes</title>
     <style>
         *{
             padding: 0;
@@ -12,156 +12,176 @@
             box-sizing: border-box;
         }
 
+        html{
+            font-size: 16px;
+            color:#FFF;
+        }
         body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #161623;
-        }
-
-        body::before{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(#f00,#f0f);
-            background-attachment:local;
-            clip-path: circle(20% at left 10%);
-        }
-
-        body::after{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(#2196f3,#e616b8);
-            clip-path: circle(20% at 100% 70%);
-        }
-        .container{
-            display: flex;
             position: relative;
+            min-height: 100vh;
+            background:linear-gradient(.5turn, rgb(224, 83, 126), 60%, rgb(101, 243, 224));
+            display: flex;
             justify-content: center;
             align-items: center;
-            max-width: 1400px;
-            z-index: 1;
             flex-wrap: wrap;
+            gap: 20px;
+            overflow: hidden;
+            background-attachment: fixed;
+        }
+
+        .bgColor .color:nth-last-of-type(1){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            top:20px;
+            left:400px;
+            background-color: rgba(216, 65, 230, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color:nth-last-of-type(2){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            bottom:20px;
+            right:400px;
+            background-color: rgba(41, 182, 123, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color:nth-last-of-type(3){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            top:120px;
+            right:400px;
+            background-color: rgba(154, 211, 80, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color{
+            border:1px solid rgba(0, 0, 0, .3);
+            animation: animate 20s linear infinite;
+            animation-delay: calc(1s * var(--i));
+            filter: blur(50px);
+        }
+
+        @keyframes animate {
+            0%,100%{
+                transform: translateX(180px);
+            }
+
+            50%{
+                transform: translateX(-180px);
+            }
         }
 
         .card{
-            position: relative;
+            background-color:rgba(255, 255, 255, .1);
+            width: 600px;
+            min-height: 300px;
             height: 400px;
-            width: 280px;
-            margin:30px;
-            box-shadow: 20px 20px 50px rgba(0, 0, 0, .5);
             border-radius: 15px;
-            background-color: rgba(255, 255, 255, .1);
+            border-top: 1px solid rgba(255, 255, 255, .8);
+            border-left: 1px solid rgba(255, 255, 255, .8);
+            border-bottom: 1px solid rgba(255, 255, 255, .3);
+            border-right: 1px solid rgba(255, 255, 255, .3);
+            box-shadow: 0 15px 15px rgba(0, 0, 0, .3);
+            z-index: 1;
+            padding:20px 20px;
             overflow: hidden;
+            transition: 2s;
+            transform: translateY(40px);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover{
+            transform: translateY(0px);
+        }
+        ol{
             display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
             justify-content: center;
             align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, .5);
-            border-left: 1px solid rgba(255, 255, 255, .5);
-            backdrop-filter:blur(5px);
+        }
+        ol li{
+            list-style-type: none;
         }
 
-        .container .card .content{
-            padding: 20px;
-            text-align: center;
-            transition: .5s;
-            transform: translateY(100px);
-            opacity: .5;
-        }
-        .container .card:hover .content{
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .card .content h2{
-            position: absolute;
-            top: -120px;
-            right: 30px;
-            font-size: 8em;
-            pointer-events: none;
-            color:rgba(255, 255, 255, .05)
-        }
-
-        .card .content h3{
-            font-size: 1.8em;
-            color:#FFF;
-        }
-
-        .card .content p{
-            font-size: 1em;
-            color:#FFF;
-            font-weight: 300;
-        }
-        .card .content a{
-            font-size: 1em;
-            color:#FFF;
-            font-weight: 500;
+        li a{
             text-decoration: none;
-            position: relative;
+            color: #FFF;
+            font-weight: 300;
+            word-spacing: 1em;
+            line-height: 20px;
             display: inline-block;
-            padding:8px 20px;
-            margin-top: 20px;
-            background-color: #FFF;
-            color:#000;
+            min-width: 120px;
+            min-height: 30px;
+            text-align: center;
+            padding:5px 0;
+            border: 1px solid rgba(241, 170, 62, 0.3);
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+            box-shadow: 0 5px 5px rgba(65, 64, 63, 0.3);
+            margin-top:10px;
+            font-size: 1.5rem;
+        }
+
+        li a:hover{
+            background-color: aquamarine;
+            color:#666;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="card">
-            <div class="content">
-                <h2>01</h2>
-                <h3>Card One</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, quod?</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>02</h2>
-                <h3>Card Two</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, quod?</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>03</h2>
-                <h3>Card Three</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, quod?</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2>04</h2>
-                <h3>Card Four</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, quod?</p>
-                <a href="#">Read More</a>
-            </div>
+    <div class="bgColor">
+        <div class="color" style="--i:1"></div>
+        <div class="color" style="--i:2"></div>
+        <div class="color" style="--i:3"></div>
+    </div>
+    <div class="card">
+        <h2>Examples</h2>
+        <div class="content">
+            <ol>
+                <li><a href="./default.html">Glass</a></li>
+                <li><a href="./blur.html">Blur</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
         </div>
     </div>
-    <script type="text/javascript" src="vanilla-tilt.js"></script>
-    <script type="text/javascript">
-        VanillaTilt.init(document.querySelectorAll(".card"), {
-            max: 25,
-            glare:true,
-            "max-glare":1,
-            speed: 400
-        });
-        
-        //It also supports NodeList
-        VanillaTilt.init(document.querySelectorAll(".card"));
-    </script>
+    <div class="card">
+        <h2>Examples</h2>
+        <div class="content">
+            <ol>
+                <li><a href="./index.html">Glass</a></li>
+                <li><a href="./blur.html">Blur</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
+        </div>
+    </div>
 </body>
 </html>
