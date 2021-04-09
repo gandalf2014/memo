@@ -64,18 +64,20 @@
 
         .bgColor .color{
             border:1px solid rgba(0, 0, 0, .3);
-            animation: animate 20s linear infinite;
+            animation: animate 20s linear infinite alternate;
             animation-delay: calc(1s * var(--i));
-            filter: blur(50px);
+            filter: blur(50px) hue-rotate(-0.25turn);
         }
 
         @keyframes animate {
-            0%,100%{
+            0%{
                 transform: translateX(180px);
+                filter: blur(40px) hue-rotate(0turn);
             }
 
-            50%{
+            100%{
                 transform: translateX(-180px);
+                filter: blur(50px) hue-rotate(-0.25turn);
             }
         }
 
@@ -150,7 +152,7 @@
                 <li><a href="./default.html">Glass</a></li>
                 <li><a href="./blur.html">Blur</a></li>
                 <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Functions">CSS Functions</a></li>
-                <li><a href=""></a></li>
+                <li><a href="./artiest.html">Artiests</a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li>
