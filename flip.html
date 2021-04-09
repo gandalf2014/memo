@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Demo</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background:linear-gradient(to bottom ,red ,yellow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .container{
+           position: relative;
+           width: 450px;
+           height: 250px;
+        }
+
+        .container .card{
+            position: absolute;
+            width: 450px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin:20px 0;
+            border-radius: 15px;
+            transition: 2s;
+        }
+
+        .card .face{
+            position: absolute;
+            transition: 2s;
+            transform-style: preserve-3d;
+            width: 100%;
+            height: 100%;
+            box-shadow: 45px 45px 45px rgb(233, 228, 228);
+            text-align: center;
+            backdrop-filter: blur(15px);
+            display: flex;
+            backface-visibility:hidden;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card .front{
+            background:rgba(216, 213, 233, 0.4);
+
+        }
+
+        .card .back{
+            background:rgba(216, 213, 233, 0.4);
+
+        }
+
+        .card:hover .face.front{
+            transform: rotateY(180deg);
+
+        } 
+        .card .face.back{
+            transform: rotateY(180deg);
+        }
+        .card:hover .face.back{
+            transform: rotateY(360deg);
+        }
+
+       
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="face front">
+                front face Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint, rem.
+            </div>
+            <div class="face back">
+                back face Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, molestias. Ex totam in nihil rerum ut mollitia quam ipsa tempore!
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
