@@ -25,7 +25,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
-            overflow: hidden;
             background-attachment: fixed;
         }
 
@@ -98,10 +97,12 @@
             transition: 2s;
             transform: translateY(40px);
             backdrop-filter: blur(5px);
+            filter:saturate(0.5);
         }
 
         .card:hover{
             transform: translateY(0px);
+            filter:saturate(1);
         }
         ol{
             display: flex;
@@ -137,6 +138,29 @@
             background-color: aquamarine;
             color:#666;
         }
+
+        
+
+        div.kebiao div{
+            grid-area: workday;
+            height: 30px;
+            width: 70px;
+            background-color: rgba(220, 200, 220, .4);
+        }
+
+        nav{
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            pointer-events: none;
+            color:rgba(255, 255, 255, .1);
+            text-shadow: 10px 0 10px rgba(138, 96, 96,.3);
+        }
     </style>
 </head>
 <body>
@@ -145,8 +169,11 @@
         <div class="color" style="--i:2"></div>
         <div class="color" style="--i:3"></div>
     </div>
+    <nav>
+        <h2>2020-2021第二学期</h2><br/>
+    </nav>
     <div class="card">
-        <h2>Examples</h2>
+        <h2>Web 前端高级</h2>
         <div class="content">
             <ol>
                 <li><a href="./default.html">Glass</a></li>
@@ -166,11 +193,51 @@
         </div>
     </div>
     <div class="card">
-        <h2>Examples</h2>
+        <h2>JSP高级网页</h2>
         <div class="content">
             <ol>
-                <li><a href="./index.html">Glass</a></li>
-                <li><a href="./blur.html">Blur</a></li>
+                <li><a href="#">基本语法</a></li>
+                <li><a href="#">内置对象</a></li>
+                <li><a href="">JSTL&EL表达式</a></li>
+                <li><a href="">数据库连接</a></li>
+                <li><a href="">Servlet&Filter</a></li>
+                <li><a href="">文件上传下载</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Android应用开发高级</h2>
+        <div class="content">
+            <ol>
+                <li><a href="">环境搭建</a></li>
+                <li><a href="">活动生命周期</a></li>
+                <li><a href="">布局&widgets</a></li>
+                <li><a href="">Intent</a></li>
+                <li><a href="">服务</a></li>
+                <li><a href="">数据库</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="card">
+        <h2>其他</h2>
+        <div class="content">
+            <ol>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li>
