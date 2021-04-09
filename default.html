@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo Indexes</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html{
+            font-size: 16px;
+            color:#FFF;
+        }
+        body{
+            position: relative;
+            min-height: 100vh;
+            background:linear-gradient(.5turn, rgb(224, 83, 126), 60%, rgb(101, 243, 224));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            overflow: hidden;
+            background-attachment: fixed;
+        }
+
+        .bgColor .color:nth-last-of-type(1){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            top:20px;
+            left:400px;
+            background-color: rgba(216, 65, 230, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color:nth-last-of-type(2){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            bottom:20px;
+            right:400px;
+            background-color: rgba(41, 182, 123, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color:nth-last-of-type(3){
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            top:120px;
+            right:400px;
+            background-color: rgba(154, 211, 80, 0.6);
+            z-index: -2;
+        }
+
+        .bgColor .color{
+            border:1px solid rgba(0, 0, 0, .3);
+            animation: animate 20s linear infinite;
+            animation-delay: calc(1s * var(--i));
+            filter: blur(50px);
+        }
+
+        @keyframes animate {
+            0%,100%{
+                transform: translateX(180px);
+            }
+
+            50%{
+                transform: translateX(-180px);
+            }
+        }
+
+        .card{
+            background-color:rgba(255, 255, 255, .1);
+            width: 600px;
+            min-height: 300px;
+            height: 400px;
+            border-radius: 15px;
+            border-top: 1px solid rgba(255, 255, 255, .8);
+            border-left: 1px solid rgba(255, 255, 255, .8);
+            border-bottom: 1px solid rgba(255, 255, 255, .3);
+            border-right: 1px solid rgba(255, 255, 255, .3);
+            box-shadow: 0 15px 15px rgba(0, 0, 0, .3);
+            z-index: 1;
+            padding:20px 20px;
+            overflow: hidden;
+            transition: 2s;
+            transform: translateY(40px);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover{
+            transform: translateY(0px);
+        }
+        ol{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        ol li{
+            list-style-type: none;
+        }
+
+        li a{
+            text-decoration: none;
+            color: #FFF;
+            font-weight: 300;
+            word-spacing: 1em;
+            line-height: 20px;
+            display: inline-block;
+            min-width: 120px;
+            min-height: 30px;
+            text-align: center;
+            padding:5px 0;
+            border: 1px solid rgba(241, 170, 62, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 5px 5px rgba(65, 64, 63, 0.3);
+            margin-top:10px;
+            font-size: 1.5rem;
+        }
+
+        li a:hover{
+            background-color: aquamarine;
+            color:#666;
+        }
+    </style>
+</head>
+<body>
+    <div class="bgColor">
+        <div class="color" style="--i:1"></div>
+        <div class="color" style="--i:2"></div>
+        <div class="color" style="--i:3"></div>
+    </div>
+    <div class="card">
+        <h2>Examples</h2>
+        <div class="content">
+            <ol>
+                <li><a href="./index.html">Glass</a></li>
+                <li><a href="./blur.html">Blur</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Examples</h2>
+        <div class="content">
+            <ol>
+                <li><a href="./index.html">Glass</a></li>
+                <li><a href="./blur.html">Blur</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
