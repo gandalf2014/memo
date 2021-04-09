@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+         .content{
+            backdrop-filter: blur(25px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6em;
+            width: 500px;
+            height: 200px;
+            background-color:rgba(117, 115, 115, 0.2);
+            z-index: 999;
+            /* border: 1px solid red; */
+            border-top: 1px solid  rgba(255, 255, 255, .4);
+            border-left: 1px solid  rgba(255, 255, 255, .4);
+            border-bottom: 1px solid  rgba(255, 255, 255, .2);
+            border-right: 1px solid  rgba(255, 255, 255, .2);
+            box-shadow: 5px 5px 25px rgba(72, 210, 235, 0.1);
+            border-radius: 5px;
+            position: relative;
+            color:rgba(255, 255, 255, .7);
+            resize: block;
+        }
+
+        .color{
+            position: absolute;
+            filter: blur(150px);
+            z-index: -1;
+        }
+
+        .color:nth-of-type(1){
+            width: 900px;
+            height: 500px;
+            background-color: rgb(236, 25, 78);
+            left: 100px;
+        }
+        .color:nth-of-type(2){
+            width: 700px;
+            height: 200px;
+            background-color: rgb(135, 224, 75);
+            bottom: 0;
+            right: 0;
+        }
+
+        .color:nth-of-type(3){
+            width: 900px;
+            height: 20vh;
+            background-color: rgb(10, 234, 241);
+            bottom: 200px;
+            right: 500px;
+        }
+
+        input{
+            outline: none;
+            border: 1px solid #660033;
+            border-radius: 15px;
+            height: 25px;
+            padding: 0 20px;
+            background-color: rgba(233, 131, 207, 0.1);
+        }
+        input[type='submit']{
+            margin-top: 20px;
+            
+        }
+        input[type='submit']:hover{
+            background-color: rgba(117, 115, 115, 0.2);
+        }
+
+        .square:nth-of-type(1){
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, .1);
+            left:-50px;
+            top:100px;
+            border-radius: 50px;
+            z-index: -1;
+        }
+        .square:nth-of-type(2){
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, .1);
+            right:-50px;
+            bottom:150px;
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .square:nth-of-type(3){
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, .1);
+            right:-80px;
+            bottom:-150px;
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .square:nth-of-type(4){
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: rgba(255, 255, 255, .1);
+            left:-80px;
+            top:-50px;
+            border-radius: 60px;
+            z-index: -1;
+        }
+
+        .square:nth-of-type(5){
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background-color: rgba(255, 255, 255, .1);
+            left:180px;
+            top:-250px;
+            border-radius: 80px;
+            z-index: -1;
+        }
+        .box{
+            z-index: -1;
+        }
+
+        form{
+            z-index: 1;
+        }
+
+        .square{
+            backdrop-filter: blur(15px);
+            animation: animate 10s linear infinite;
+            animation-delay: calc(1s * var(--i));
+            border:1px solid rgba(255, 255, 255, .1);
+            filter: blur(5px);
+        }
+
+        @keyframes animate {
+            0%,100%{
+                transform: translateY(-80px);
+            }
+            50%{
+                transform: translateY(80px);
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="box">
+                <div class="square" style="--i:1"></div>
+                <div class="square" style="--i:2"></div>
+                <div class="square" style="--i:3"></div>
+                <div class="square" style="--i:4"></div>
+                <div class="square" style="--i:5"></div>
+            </div>
+            <form action="#">
+                <h3>User Login</h3>
+                    <input type="text" name="username" id=""><br/>
+                    <input type="text" name="password" id=""><br/>
+                    <input type="submit" value="User Login"><br/>
+                </div>
+            </form>
+        </div>
+        <section class="color"></section>
+        <section class="color"></section>
+        <section class="color"></section>
+        
+    </div>
+</body>
+</html>
