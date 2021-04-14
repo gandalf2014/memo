@@ -18,6 +18,8 @@
             overflow: hidden;
             background-image: url("./gallery.jpg");
             background-size: cover;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
         }
         .color{
             width: 600px;
@@ -48,21 +50,45 @@
         .content{
             width: 330px;
             height: 450px;
-            background-color: rgba(255, 255, 255, .3);
+            background-color: rgba(255, 255, 255, .03);
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             border-radius: 15px;
             box-shadow: 0 0 5px rgba(255, 255, 255, .3);
-            border-top: 1px solid rgba(255, 255, 255, .8);
-            border-left: 1px solid rgba(255, 255, 255, .8);
+            border: 1px solid rgba(255, 255, 255, .4);
+            /* border-left: 1px solid rgba(255, 255, 255, .8); */
             transition: 1s;
-            transform: translateY(40px);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(2px);
+            position: absolute;
         }
-        .content:hover{
-            transform: translateY(0px);
+        .content.back{
+            transition: 1s;
+            transform: rotateY(180deg);
+            z-index: -1;
+            color:#FFF;
+        }
+        .content.front:hover{
+            transform:  rotateY(180deg);
+        }
+
+        .content.front:hover+.content.back{
+            transform:  rotateY(360deg);
+            z-index: 1;
+        }
+
+        .content.back{
+            display: block;
+            padding: 20px;
+            overflow: hidden;
+            font-weight: 300;
+            font-size: 1em;
+        }
+        .content.back p{
+            line-height: 20px;
+            padding: 20px ;
+            padding-bottom: 20px;
         }
         .content .result{
             margin-top: 20px;
@@ -111,8 +137,7 @@
         <div class="color"></div>
         <div class="color"></div>
     </div>
-
-    <div class="content">
+    <div class="content front">
         <div class="result">
             0
         </div>
@@ -135,6 +160,10 @@
             <div class="btn">=</div>
 
         </div>
+    </div>
+    <div class="content back">
+        <h2>The simple calculator</h2>
+        <p>Consectetur dicta labore molestias quia sequi harum soluta distinctio consequatur explicabo animi blanditiis quas nobis obcaecati Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam porro possimus, rem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam officiis asperiores earum eius vel rem impedit molestiae debitis accusamus nemo nobis in, consectetur illum sequi accusantium corrupti veniam nesciunt sint! temporibus dolores beatae? Optio mollitia fuga corrupti minima? libero odit, suscipit omnis nisi?</p>
     </div>
     <script>
         $(function(){

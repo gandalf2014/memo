@@ -13,7 +13,7 @@
         }
 
         body{
-            background:linear-gradient(to bottom ,red ,yellow);
+            background:#161629;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,31 +37,32 @@
             overflow: hidden;
             margin:20px 0;
             border-radius: 15px;
-            transition: 2s;
+            transition: 1s;
+            transform-style: preserve-3d;
         }
 
         .card .face{
             position: absolute;
-            transition: 2s;
-            transform-style: preserve-3d;
+            transition: 1s;
             width: 100%;
             height: 100%;
-            box-shadow: 45px 45px 45px rgb(233, 228, 228);
+            box-shadow: 0 0 5px rgba(117, 113, 113,0.6);
             text-align: center;
             backdrop-filter: blur(15px);
             display: flex;
             backface-visibility:hidden;
             justify-content: center;
             align-items: center;
+            color: #FFF;
         }
 
         .card .front{
-            background:rgba(216, 213, 233, 0.4);
+            background:rgba(216, 213, 233, 0.14);
 
         }
 
         .card .back{
-            background:rgba(216, 213, 233, 0.4);
+            background:rgba(216, 213, 233, 0.14);
 
         }
 
@@ -88,7 +89,7 @@
                 front face Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint, rem.
             </div>
             <div class="face back">
-                back face Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, molestias. Ex totam in nihil rerum ut mollitia quam ipsa tempore!
+                back face Lorem ipsum dolor,Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, dolor. sit amet consectetur adipisicing elit. Delectus, molestias. Ex totam in nihil rerum ut mollitia quam ipsa tempore!
             </div>
         </div>
     </div>
