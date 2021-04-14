@@ -13,6 +13,7 @@
         }
         body{
             display: flex;
+            min-width: 100vw;
             min-height: 100vh;
             justify-content: center;
             align-items: center;
@@ -20,14 +21,14 @@
         }
 
          .content{
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(125px);
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.6em;
             width: 500px;
             height: 200px;
-            background-color:rgba(117, 115, 115, 0.2);
+            background-color:rgba(236, 228, 228, 0.2);
             z-index: 999;
             /* border: 1px solid red; */
             border-top: 1px solid  rgba(255, 255, 255, .4);
@@ -147,7 +148,7 @@
         }
 
         .square{
-            backdrop-filter: blur(15px);
+            
             animation: animate 10s linear infinite;
             animation-delay: calc(1s * var(--i));
             border:1px solid rgba(255, 255, 255, .1);

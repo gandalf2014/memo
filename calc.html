@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <style>
+        *{padding: 0;margin: 0;box-sizing: border-box;}
+        body{
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background-image: url("./gallery.jpg");
+            background-size: cover;
+        }
+        .color{
+            width: 600px;
+            height: 400px;
+            position: absolute;
+            filter: blur(250px);
+            z-index: -1;
+        }
+        .color:nth-of-type(1){
+            background-color: #FF3399;
+            left: 30%;
+            top: 10px;
+        }
+        .color:nth-of-type(2){
+            background-color: #00CCCC;
+            left: 10%;
+            bottom: 0;
+            width: 300px;
+            height: 400px;
+        }
+        .color:nth-of-type(3){
+            background-color: #bee21f;
+            width: 300px;
+            height: 200px;
+            right: 10px;
+            bottom: 0;
+        }
+        .content{
+            width: 330px;
+            height: 450px;
+            background-color: rgba(255, 255, 255, .3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, .3);
+            border-top: 1px solid rgba(255, 255, 255, .8);
+            border-left: 1px solid rgba(255, 255, 255, .8);
+            transition: 1s;
+            transform: translateY(40px);
+            backdrop-filter: blur(5px);
+        }
+        .content:hover{
+            transform: translateY(0px);
+        }
+        .content .result{
+            margin-top: 20px;
+            width: 300px;
+            height: 60px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, .3);
+            text-align: right;
+            line-height: 60px;
+            padding:0 30px;
+            font-size: 1.6em;
+            font-weight: 300;
+            color:rgba(255, 255, 255, 1);
+            overflow: hidden;
+            /* border: inset 1px solid rgba(0, 0, 0, .6); */
+        }
+
+        .content .buttons{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .content .buttons .btn{
+            height: 60px;
+            width: 60px;
+            background-color: rgba(255, 255, 255, .6);
+            border-radius: 5px;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+            font-size: 1.6em;
+            color:rgba(255, 255, 255, 1);
+        }
+
+        .content .buttons .btn:hover{
+            background-color: rgba(0, 0, 0, .05);
+            border-top: 1px solid #FFF;
+            border-left:1px solid #FFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="bgColor">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+    </div>
+
+    <div class="content">
+        <div class="result">
+            0
+        </div>
+        <div class="buttons">
+            <div class="btn">7</div>
+            <div class="btn">8</div>
+            <div class="btn">9</div>
+            <div class="btn">*</div>
+            <div class="btn">4</div>
+            <div class="btn">5</div>
+            <div class="btn">6</div>
+            <div class="btn">-</div>
+            <div class="btn">1</div>
+            <div class="btn">2</div>
+            <div class="btn">3</div>
+            <div class="btn">+</div>
+            <div class="btn">+/-</div>
+            <div class="btn">0</div>
+            <div class="btn">.</div>
+            <div class="btn">=</div>
+
+        </div>
+    </div>
+    <script>
+        $(function(){
+            var result="";
+            $(".btn").click(function(){
+                if($(this).html()==="="){
+                    $(".result").html(eval(result));
+                    result="";
+                }else{
+                    result += $(this).html();
+                    $(".result").html(result);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

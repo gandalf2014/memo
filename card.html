@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card demo</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            min-width: 100vw;
+            min-height: 100vh;
+            background:linear-gradient(#0000FF,40%,#00FFFF) ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .card{
+            height: 450px;
+            width: 300px;
+            overflow: hidden;
+            margin-left: 20px;
+            margin-top: 40px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 5px 1px rgba(248, 247, 247, 0.8);
+            transition: 1s;
+            position: relative;
+            /* border-top:1px solid #FFF;
+            border-left: 1px solid #FFF; */
+        }
+        .card img{
+            filter: saturate(0.1) blur(2px);
+            transition: 1s;
+        }
+        .card:hover{
+            transform: translateY(-35px);
+        }
+        .card:hover img{
+            filter: saturate(1) blur(0);
+        }
+
+        .card .info{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.4);
+            min-height: 30%;
+            backdrop-filter: blur(2px);
+            flex-wrap: wrap;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            transform: translateY(180px);
+            transition: 1s;
+        }
+
+        .card:hover .info{
+            transform: translateY(0);
+        }
+        .card .info p {
+            font-weight: 300;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .card .info h2 {
+            transition: 1s;
+            transform: translateY(-20px);
+        }
+
+        .card .info p{
+            transition: 1s;
+            transform: translateX(-20px);
+        }
+
+        .card:hover .info h2{
+            transform: translateY(0);
+        }
+        .card:hover .info p{
+            transform: translateX(0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="bgImg">
+            <img src="./001.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, accusantium.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="bgImg">
+            <img src="./002.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, accusantium.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="bgImg">
+            <img src="./006.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, accusantium.</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>
