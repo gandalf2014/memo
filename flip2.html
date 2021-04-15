@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .info{
+            /* display: block; */
+            /* border-radius: 50%; */
+            border-radius: 15px;
+            height: 300px;
+            width: 600px;
+            margin: 0;
+            /* background:radial-gradient(circle at 20% 20%, transparent, 10%,#f71e3b);
+            clip-path: circle(70%); */
+            background: rgba(255, 255, 255, .13);
+            backdrop-filter: blur(5px);
+            color: #FFF;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            transition: 1s;
+            position: absolute;
+            z-index: -1;
+            backface-visibility: hidden;
+        }
+
+        .card{
+            position: relative;
+            height: 300px;
+            width: 600px;
+            transform-style: preserve-3d;
+        }
+
+        .info.back{
+            transform: rotateY(180deg);
+        }
+
+        .card:hover .info.front{
+            transform: rotateY(180deg);
+            z-index: -1;
+        }
+
+        .card:hover .info.back{
+            transform: rotateY(0deg);
+            z-index: 1;
+        }
+
+        body{
+            min-height: 100vh;
+            background:radial-gradient(ellipse at 50% -300%, #ff3292,40%,transparent),
+                        radial-gradient(circle at left, #3d0af78c, 10%,transparent),
+                    radial-gradient(ellipse at 50% 100%, #06927f54, 60%,transparent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        body::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#f70deb,#5ff5f5);
+            clip-path: circle(30% at 10% 20%);
+            z-index: -2;
+        }
+
+        body::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#0ba6ee,#d4e916);
+            clip-path: circle(30% at 90% 70%);
+            z-index: -2;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <figure class="info back">
+            <h2>Lorem ipsum dolor sit amet.</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, necessitatibus quasi ipsam neque a atque voluptate nesciunt debitis veniam blanditiis perferendis illum molestiae eveniet inventore unde? Corporis tempore cumque nostrum.</p>
+        </figure>
+        <figure class="info front">
+            <h2>Some one there</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima consequatur maiores doloremque sed? At itaque ipsa sint distinctio est sapiente commodi voluptatum rerum, cum esse quod eum, sunt consectetur. Veritatis soluta distinctio accusamus expedita natus totam cum explicabo velit asperiores itaque nam possimus, iusto alias nihil obcaecati at, aperiam nisi?</p>
+        </figure>
+    </div>
+</body>
+</html>
