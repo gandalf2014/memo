@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card2 Demo</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            min-height: 100vh;
+            background:#16162f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .card{
+            width: 300px;
+            height: 450px;
+            overflow: hidden;
+            margin: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border:1px solid rgba(255, 255, 255, 0.6); */
+            box-shadow: 0 0 5px 2px  rgba(255, 255, 255, 0.6);
+            position: relative;
+            transition: 1s;
+        }
+
+        .card .bg{
+            width: 300px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card img{
+            transition: 1s;
+            filter: saturate(.1) blur(2px);
+        }
+        .card:hover{
+            transform: translateY(-10px) ;
+        }
+        .card:hover img{
+            filter: saturate(1) blur(0);
+        }
+
+        .card .info{
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            color:rgba(255, 255, 255, 0.9);
+            transition: 1s;
+            transform: translateY(380px);
+            backdrop-filter: blur(2px);
+        }
+
+        .card:hover .info{
+            transform: translateY(0px);
+        }
+
+        .card .info p {
+            font-size: 16px;
+            font-weight: 300;
+            transition: 1s;
+            transform: translateX(-300px);
+        }
+
+        .card:hover .info p{
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="bg">
+            <img src="./001.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, dolore sapiente? Neque soluta labore nemo perferendis non saepe dolore nobis laboriosam quas nisi. Est vel provident, similique alias adipisci nihil.</p>
+        </div>
+    </div>
+   <!-- <div class="card">
+        <div class="bg">
+            <img src="./002.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, dolore sapiente? Neque soluta labore nemo perferendis non saepe dolore nobis laboriosam quas nisi. Est vel provident, similique alias adipisci nihil.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="bg">
+            <img src="./006.jfif" alt="">
+        </div>
+        <div class="info">
+            <h2>Some One</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, dolore sapiente? Neque soluta labore nemo perferendis non saepe dolore nobis laboriosam quas nisi. Est vel provident, similique alias adipisci nihil.</p>
+        </div>
+    </div> -->
+    
+</body>
+</html>
