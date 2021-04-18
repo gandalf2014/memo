@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Dragable Demo</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-width: 100vw;
+            position: relative;
+            background-color: #15286a;
+        }
+        .navigation{
+            height: 50px;
+            width: 50px;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 1s;
+            display: flex;
+            /* justify-content: center; */
+            flex-wrap: wrap;
+            /* align-items: center; */
+        }
+
+        .navigation .toggle{
+            width: 100%;
+            height: 50px;
+            background-color: #F00;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .navigation .toggle::before{
+            content: '+';
+            /* position: absolute; */
+            /* top: 0; */
+            /* left: 0; */
+            overflow: hidden;
+            width: 50px;
+            height: 50px;
+            font-size: 1.9em;
+            color:#FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            transition: 1s;
+        }
+
+        .navigation.active{
+            width: 300px;
+            height: 500px;
+            background-color: #FFF;
+        }
+        .navigation .toggle.active{
+            background-color: #23a88c;
+        }
+        .navigation .toggle.active:before{
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <div class="toggle"></div>
+        <div class="content">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <soan>home</soan>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"></span>
+                        <soan></soan>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"></span>
+                        <soan></soan>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"></span>
+                        <soan></soan>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"></span>
+                        <soan></soan>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var navigation  = document.querySelector(".navigation");
+        document.querySelector(".toggle").onclick = function(){
+            this.classList.toggle('active');
+            navigation.classList.toggle('active');
+        }
+    </script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $( function() {
+    $(".navigation").draggable();
+    } );
+</script>
+</body>
+</html>
