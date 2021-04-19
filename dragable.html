@@ -21,6 +21,7 @@
             min-width: 100vw;
             position: relative;
             background-color: #15286a;
+            column-gap: 10px;
         }
         .navigation{
             height: 50px;
@@ -29,7 +30,8 @@
             border-radius: 5px;
             overflow: hidden;
             cursor: pointer;
-            transition: 1s;
+            transition: width 1s,height 1s;
+            transition-delay: 0.75s, 0s;
             display: flex;
             /* justify-content: center; */
             flex-wrap: wrap;
@@ -45,13 +47,13 @@
             justify-content: flex-end;
             align-items: center;
             overflow: hidden;
+            transition: 1s;
         }
-
+        .navigation .toggle:hover{
+            background-color: #23a568;
+        }
         .navigation .toggle::before{
             content: '+';
-            /* position: absolute; */
-            /* top: 0; */
-            /* left: 0; */
             overflow: hidden;
             width: 50px;
             height: 50px;
@@ -61,7 +63,7 @@
             justify-content: center;
             align-items: center;
             font-weight: 500;
-            transition: 1s;
+            transition: 0.5s;
         }
 
         .navigation.active{
@@ -72,52 +74,137 @@
         .navigation .toggle.active{
             background-color: #23a88c;
         }
-        .navigation .toggle.active:before{
-            transform: rotate(45deg);
+        .navigation .toggle.active::before{
+            transform: rotate(315deg);
+        }
+
+        .navigation .toggle:hover::before{
+            transform: rotate(315deg);
+        }
+
+        /* .navigation .toggle.active::before:hover{
+            color: red;
+        } */
+        .navigation .content{
+            width: 100%;
+            height: 100%;
+        }
+        .navigation .content ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content:flex-start;
+            align-items: center;
+        }
+
+        .navigation .content ul li {
+            display: block;
+            width: 100%;
+            padding: 5px 30px;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 1px solid #321525;
+        }
+        .navigation .content ul li:hover{
+            background-color: #23a568;
+        }
+
+        .navigation .content li:hover  span{
+            color: #FFF;
+        }
+        .navigation .content ul li span{
+            display: inline-block;
+            margin: 0 10px;
+            color: #112121;
+            line-height: 32px;
+            text-transform: capitalize;
+        }
+        .navigation .content ul li a{
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: flex;
+            justify-content:flex-start;
+            align-items: center;
+        }
+
+        .navigation .content ul li fa{
+            font-size: 1.2em;
+        }
+
+        .main{
+            min-width: 70%;
+            min-height: 85vh;
+            background-color:#23a6cc;
+            border-radius: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="navigation">
-        <div class="toggle"></div>
+    <div class="navigation active">
+        <div class="toggle active"></div>
         <div class="content">
             <ul>
                 <li>
                     <a href="#">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <soan>home</soan>
+                        <span class="icon"><i class="fa fa-home fa-2x"></i></span>
+                        <span>Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="icon"></span>
-                        <soan></soan>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-server fa-2x" aria-hidden="true"></i></span>
+                        <span>Services</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="icon"></span>
-                        <soan></soan>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-facebook-square fa-2x"></i></span>
+                        <span>Facebook</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="icon"></span>
-                        <soan></soan>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-home fa-2x"></i></span>
+                        <span>home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="icon"></span>
-                        <soan></soan>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-server fa-2x" aria-hidden="true"></i></span>
+                        <span>Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-facebook-square fa-2x"></i></span>
+                        <span>Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-cogs fa-2x"></i></span>
+                        <span>Config</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></span>
+                        <span>Sign Off</span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
+    <div class="main"></div>
     <script>
         var navigation  = document.querySelector(".navigation");
-        document.querySelector(".toggle").onclick = function(){
+        document.querySelector(".toggle").ondblclick = function(){
             this.classList.toggle('active');
             navigation.classList.toggle('active');
         }
