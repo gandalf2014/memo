@@ -157,7 +157,26 @@
             /* overflow-y: scroll; */
         }
         .card.list{
-            overflow-y: scroll;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            scrollbar-width: 5px;
+        }
+
+        .card.list h2{
+            width: 100%;
+            text-align: center;
+        }
+
+        .card.list .files{
+            width: 100%;
+            padding: 20px;
+        }
+
+        .card.list .files ul{
+            list-style-type: none;
         }
     </style>
 </head>
@@ -263,7 +282,10 @@
           const data = await response.json();
           let htmlString = '<ul>';
           for (let file of data) {
-            htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+              if(file.name.indexOf("html")!=-1){
+                htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+              }
+            
           }
           htmlString += '</ul>';
           document.getElementsByClassName('files')[0].innerHTML = htmlString;
