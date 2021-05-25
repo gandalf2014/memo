@@ -40,6 +40,7 @@
             height: 300px;
             width: 600px;
             transform-style: preserve-3d;
+            
         }
 
         .info.back{
@@ -48,12 +49,10 @@
 
         .card:hover .info.front{
             transform: rotateY(180deg);
-            z-index: -1;
         }
 
         .card:hover .info.back{
             transform: rotateY(0deg);
-            z-index: 1;
         }
 
         body{
@@ -65,6 +64,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            perspective: 1200px;
         }
 
         body::before{

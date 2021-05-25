@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Demo</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            min-height: 100vh;
+            min-width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            border-bottom: 150px solid #000;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            /* transition: 1s; */
+        }
+        .container:hover{
+            border-left: 150px solid #000;
+            border-top: 150px solid transparent;
+            border-bottom: 150px solid transparent;
+        }
+
+        .container2{
+            height: 400px;
+            width: 400px;
+            background-color: rgba(0, 0, 0, 0.1);
+            clip-path:polygon(50%,0%,0%,100%,100%,100%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container"></div>
+<div class="container2"></div>
+</body>
+</html>

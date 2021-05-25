@@ -1,0 +1,18 @@
+get https://api.github.com/repos/gandalf2014/memo/contents
+
+
+
+
+###
+GET https://gandalf2014.mock.pw/api/names
+
+
+###
+POST https://gandalf2014.mock.pw/api/sections HTTP/1.1
+Accept: application/json
+
+{
+    "id":"1",
+    "username":"test123",
+    "password":"pwd"
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            min-height: 100vh;
+            perspective: 1200px;
+        }
+
+        :is(.card,.front,.back){
+            width: 600px;
+            height:300px;
+            background-color: rgba(200, 200, 200,0.3);
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #999;
+            transition: 2s;
+        }
+
+        div:not(.card){
+            padding: 60px;
+            position: absolute;
+        }
+
+        :is(.front){
+            backface-visibility: visible;
+        }
+        .card{
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        :is(.back){
+            filter: opacity(0);
+            transform: rotateY(180deg);
+        }
+
+        .card:hover{
+            transform: rotateY(180deg);
+        }
+
+        .card:hover .back{
+            filter: opacity(1);
+        }
+        .card:hover .front{
+            filter: opacity(0.3) blur(2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="front">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic aliquam iure error sed sint omnis temporibus. Esse distinctio atque quam. inventore aliquam vel eum, natus in eaque explicabo? In, voluptatibus culpa!Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, suscipit!</div>
+        <div class="back">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore quo doloremque officia optio quibusdam iure nobis nemo ut rerum est?</div>
+    </div>
+</body>
+</html>

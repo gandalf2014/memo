@@ -1,0 +1,28 @@
+# GET https://api.github.com/repos/gandalf2014/memo/projects
+# Accept: application/vnd.github.inertia-preview+json
+
+
+
+
+# GET https://api.github.com/repos/gandalf2014/memo/contents
+
+
+
+# GET https://gandalf2014.mock.pw/api/sections
+
+
+###
+POST   https://gandalf2014.mock.pw/api/sections
+
+Accept: application/json
+
+{
+    "id":"2",
+    "username":"gandalf",
+    "password":"test123"
+}
+
+
+
+###
+

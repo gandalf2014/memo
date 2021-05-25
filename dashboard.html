@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="./jquery-3.6.0.min.js"></script>
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style-type: none;
+        }
+        
+        body {
+            min-height: 100vh;
+            min-width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .sidebar {
+            width: 300px;
+            min-height: 100vh;
+            background-color: #9900ac;
+            transition: 0.5s;
+            position:fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .main {
+            width: 100%;
+            height: 200vh;
+        }
+        
+        .sidebar .toggle_menu {
+            height: 50px;
+            width: 50px;
+            color:#FFF;
+            font-size: 1.6em;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        
+        .sidebar.active {
+            width: 80px;
+        }
+        
+        .sidebar ul {
+            width: 100%;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        
+        .sidebar ul li {
+            height: 60px;
+            width: 100%;
+            font-size: 1.6em;
+            font-weight: 200;
+            color: #FFF;
+            line-height: 60px;
+            text-align: left;
+            border-bottom: 1px solid #fff;
+            transition: 0.5s;
+            padding-left: 5px;
+            display: flex;
+            justify-content: left;
+        }
+        
+        .sidebar ul li span:nth-of-type(1) {
+            width: 50px;
+            /* height: 50px; */
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        .sidebar ul li span {
+            display: inline-block;
+            /* margin-left: 10px; */
+            width: 70px;
+            vertical-align: middle;
+        }
+        
+        .sidebar ul li:hover {
+            background-color: hsl(300, 100%, 50%);
+        }
+
+        .sidebar ul li span.active{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="toggle_menu">
+            <i class="fa fa-list"></i>
+        </div>
+        <ul>
+            <li><span><i class="fa fa-home fa-2x" aria-hidden="true"></i></span><span>Home</span></li>
+            <li><span><i class="fa fa-book fa-2x" aria-hidden="true"></i></span><span>Books</span></li>
+            <li><span><i class="fa fa-users fa-2x" aria-hidden="true"></i></span><span>Group</span></li>
+            <li><span><i class="fa fa-user fa-2x" aria-hidden="true"></i></span><span>User</span></li>
+            <li><span><i class="fa fa-th-list fa-2x" aria-hidden="true"></i></span><span>Services</span></li>
+            <li><span><i class="fa fa-tasks fa-2x" aria-hidden="true"></i></span><span>Products</span></li>
+            <li><span><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></span><span>LogOff</span></li>
+        </ul>
+    </div>
+    <div class="main">
+        
+    </div>
+    <script crossorigin="anonymous" integrity="sha512-rEUmaOwq8RTKLJ+i+F05YDchx4/UJ+yuM83C2RHPV8LqU6xhc03MYUE+6QQM3GGtKNCZCgHmoYKCSSgGSg92ew==" src="https://lib.baomitu.com/vue/3.0.11/vue.cjs.js"></script>
+    <script>
+        // document.querySelector(".toggle_menu").onclick = function() {
+        //     document.querySelector(".sidebar").classList.toggle('active');
+        // }
+
+        $(function(){
+            $(".toggle_menu").dblclick(function(){
+                $(".sidebar").toggleClass("active");
+                $("span:nth-of-type(2)").toggleClass("active");
+            });
+        });
+    </script>
+
+
+</script>
+</body>
+
+</html>

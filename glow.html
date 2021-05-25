@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>glow demo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style-type: none;
+        }
+        
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            height: 30px;
+            width: 90px;
+            background-color: hsl(calc(40*var(--i)), 100%, 50%);
+            border-radius: 30px;
+            box-shadow: 0 0 20px hsl(calc(40*var(--i)), 100%, 50%);
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 0 20px #966;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn" style="--i:1">Lorem</div>
+    <div class="btn" style="--i:2"></div>
+    <div class="btn" style="--i:3"></div>
+    <div class="btn" style="--i:4"></div>
+    <div class="btn" style="--i:5"></div>
+    <div class="btn" style="--i:6"></div>
+    <div class="btn" style="--i:7"></div>
+    <div class="btn" style="--i:8"></div>
+    <div class="btn" style="--i:9"></div>
+</body>
+
+</html>
