@@ -27,6 +27,7 @@
             border-radius: 20px;
             box-shadow: 5px 5px 5px #999;
             transition: 2s;
+            user-select: none;
         }
 
         div:not(.card){
@@ -34,16 +35,16 @@
             position: absolute;
         }
 
-        :is(.front){
+        /* :is(.front){
             backface-visibility: visible;
-        }
+        } */
         .card{
             position: relative;
             transform-style: preserve-3d;
         }
 
         :is(.back){
-            filter: opacity(0);
+            filter: opacity(0.3) blur(2px);
             transform: rotateY(180deg);
         }
 
@@ -52,7 +53,7 @@
         }
 
         .card:hover .back{
-            filter: opacity(1);
+            filter: opacity(.8);
         }
         .card:hover .front{
             filter: opacity(0.3) blur(2px);
@@ -62,7 +63,7 @@
 <body>
     <div class="card">
         <div class="front">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic aliquam iure error sed sint omnis temporibus. Esse distinctio atque quam. inventore aliquam vel eum, natus in eaque explicabo? In, voluptatibus culpa!Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, suscipit!</div>
-        <div class="back">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore quo doloremque officia optio quibusdam iure nobis nemo ut rerum est?</div>
+        <div class="back">Lorem ipsum dolor Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia ratione consequatur quod, dicta ab, iusto laboriosam eos doloremque amet quo placeat nihil tempora quis obcaecati consectetur ex recusandae possimus commodi eius! Facere expedita, odit et fugit ipsum eligendi rem perferendis. sit amet consectetur, adipisicing elit. Labore quo doloremque officia optio quibusdam iure nobis nemo ut rerum est?</div>
     </div>
 </body>
 </html>
