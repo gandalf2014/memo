@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告轮动</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            position: relative;
+            height: 300px;
+            width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .images{
+            position: absolute;
+            height: 100%;
+            width: 4200px;
+            transition: 1s;
+        }
+        .bgImg{
+            float:left;
+            height: 100%;
+            width: 600px;
+        }
+        .nav{
+            position: absolute;
+            height: 20px;
+            width: 200px;
+            bottom: 10px;
+            left:200px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+        }
+
+        .nav ul{
+            padding:2px 0;
+        }
+        .nav ul li{
+            list-style: none;
+            height: 16px;
+            width: 16px;
+            float:left;
+            background-color: #FFF;
+            border-radius: 50%;
+            margin-left: 11px;
+            cursor: pointer;
+        }
+
+        .nav ul li:hover{
+            background-color: red;
+        }
+        .nav ul li:nth-of-type(1){
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- .container>.images>.bgImg*7^.nav>ul>li*7 -->
+    <div class="container">
+        <div class="images">
+            <div class="bgImg" style="background:url('./01.jpg')"></div>
+            <div class="bgImg" style="background:url('./02.jpg')"></div>
+            <div class="bgImg" style="background:url('./03.jpg')"></div>
+            <div class="bgImg" style="background:url('./04.jpg')"></div>
+            <div class="bgImg" style="background:url('./05.jpg')"></div>
+            <div class="bgImg" style="background:url('./06.jpg')"></div>
+            <div class="bgImg" style="background:url('./07.jpg')"></div>
+        </div>
+        <div class="nav">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <input name="username" id="usrname" value="Jquery"/>
+    </div>
+    <script>
+        $(function(){
+            var currentShowImageIndex = 0; //当前正在显示的图片的下标
+            var diff = 0 ; //表示图片移动的距离
+            $("li").on("click",function(){
+                var clickedCircleIndex = $("li").index($(this));
+                $(this).css("backgroundColor","red");
+                $("li").eq(currentShowImageIndex).css("backgroundColor","white");
+
+                diff =diff - (clickedCircleIndex - currentShowImageIndex )*600;
+
+                $(".images").css("left",diff+'px');
+
+                currentShowImageIndex =  clickedCircleIndex;
+            });
+        });
+    </script>
+</body>
+</html>

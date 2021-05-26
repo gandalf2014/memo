@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarpanch&display=swap" rel="stylesheet">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eee;
+            perspective: 1000px;
+        }
+
+        .card{
+            height: 300px;
+            width: 450px;
+            background: #ccc;
+            border-radius: 15px;
+            transition: 2s;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 5px 5px 5px #999;
+        }
+
+        .card:hover{
+            transform: rotateY(180deg);
+        }
+
+        .back,.front{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* padding: 40px;  */
+            backface-visibility: hidden;
+            transition: 2s;
+            
+        }
+
+        .back{
+            transform: rotateY(180deg);
+            /* opacity: 0.1; */
+        }
+        .front:hover{
+            filter: opacity(0.3);
+            user-select: none;
+        }
+
+        .front .bg{
+            width: 100%;
+            height: 300px;
+            background: url("./bg_map.png") no-repeat;
+            background-size: cover;
+            filter: saturate(30%);
+        }
+        .front .wrapper{
+            position: relative;
+        }
+
+        .front .bg,.front .content{
+            position: absolute;
+        }
+
+        .front .title,.front .number{
+            padding:20px;
+            font-size: 1.3em;
+            color: #eee;
+            font-family: 'Sarpanch', sans-serif;
+            text-shadow: 5px 5px 5px #999;
+        }
+
+        .front .number{
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-top: 40px;
+            margin-left:40px ;
+            
+        }
+
+        .back .info{
+            padding: 40px;
+        }
+        .back .black{
+            width: 85%;
+            height: 50px;
+            background:#333;
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+        .chip{
+            background-image: url("./chip.png");
+            /* background-color: red; */
+            background-size: cover;
+            width: 60px;
+            height: 50px;
+        }
+
+        .number .info{
+            font-size: 0.25em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="back"> 
+            <div class="slidebar">
+                <div class="black"></div>
+            </div>    
+            <div class="info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima perferendis error sunt debitis facilis amet esse, quaerat similique nostrum atque. Nobis maiores dolorum nostrum architecto fugit! Debitis libero saepe sunt corporis fugit dignissimos unde hic, laboriosam eius ex perspiciatis dolore?
+            </div>
+        </div>
+        <div class="front">
+            <div class="wrapper">
+                <div class="bg"></div>
+                <div class="content">
+                    <div class="title">
+                        <p>Bank|信用卡</p>
+                    </div>
+                    <div class="number">
+                        <p>7890&nbsp;6789&nbsp;4567&nbsp;1234</p>
+                        <div>
+                            <div class="chip"></div>
+                            <div class="info">
+                                10/25&nbsp;25&nbsp;VALID<br/>
+                                ZHANG&nbsp;SAN
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
