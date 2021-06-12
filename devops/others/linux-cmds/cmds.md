@@ -1,0 +1,128 @@
+## create user user
+`useradd -m -G root,wheel gandalf -p "234234#!qwq"`
+
+## simple httpserver
+`python -m SimpleHTTPServer`
+
+## remove user
+1. `userdel gandalf`
+2.  `rm -rf /home/gandalf`
+3.  `rm -rf /var/spool/mail/gandalf`
+
+## vi /etc/ssh/sshd_config
+1.  `PasswordAuthentication yes`
+## sudoedit /etc/sudoers
+1.  `%wheel  ALL=(ALL)       NOPASSWD: ALL`
+
+## curl & wget
+- curl -O -C -L url
+- wget -O filename url
+- wget url
+
+## awk && grep 
+```
+[root@centos7 ~]# ps -ef | grep  autossh | grep -v grep
+root      3556  3472  0 04:07 pts/0    00:00:00 autossh -M 0 -o ServerAliveInterval 30 -o ServerAliveCountMax 3 -R jupyterhub.serveo.net:80:192.168.33.11:8888 serveo.net
+[root@centos7 ~]# ps -ef | grep  autossh | grep -v grep | awk -F ' ' '{print $15}'
+ServerAliveCountMax
+[root@centos7 ~]# ps -ef | grep  autossh | grep -v grep | awk -F ' ' '{print $NF}'
+serveo.net
+
+```
+## Rsync
+**Note** local push to remote better than pull from remote(no permission denied)
+
+```ruby
+    docker commit chef-workstation chef-workstation:20190805
+    docker commit chef-server chef-server:20190805
+    docker commit chef-node1 chef-node1:20190805
+    docker commit ngp-jenkins ngp-jenkins:20190805
+    docker commit ngp-nginx ngp-nginx:20190805
+    docker commit ngp-proxy ngp-proxy:20190805
+
+    docker save -o /opt/chef-workstation-20190805.tar.gz  chef-workstation:20190805
+    docker save -o /opt/chef-server-20190805.tar.gz  chef-server:20190805
+    docker save -o /opt/chef-node1-20190805.tar.gz  chef-node1:20190805
+    docker save -o /opt/ngp-jenkins-20190805.tar.gz  ngp-jenkins:20190805
+    docker save -o /opt/ngp-nginx-20190805.tar.gz  ngp-nginx:20190805
+    docker save -o /opt/ngp-proxy-20190805.tar.gz  ngp-proxy:20190805
+
+    docker commit sonarqube sonarqube:20190805
+    docker commit ngp-nexus ngp-nexus:20190805
+    docker save -o /opt/sonarqube-20190805.tar.gz  sonarqube:20190805
+    docker save -o /opt/ngp-nexus-20190805.tar.gz  ngp-nexus:20190805
+```
+### scripts
+#### dev2 scripts
+```shell
+#!/bin/bash
+containers=( sonarqube ngp-nexus )
+for i in "${containers[@]}"
+do
+        echo docker commit $i $i:`date +%Y%m%d`
+        echo docker save -o /opt/$i:`date +%Y%m%d`.tar.gz $i:`date +%Y%m%d`
+done
+
+SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete /opt/*.tar.gz  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/docker-images/
+
+SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete  /var/lib/docker/volumes/9fd67e226413dc19adf4fe3ccbd88ccb7ef74266532f2268742b814a298e89b9  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/sonar/
+
+SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete /opt/nexus-data  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/
+```
+---
+
+#### dev1 scripts
+```shell
+#!/bin/bash
+containers=( ngp-jenkins ngp-proxy ngp-nginx )
+for i in "${containers[@]}"
+do
+        echo docker commit $i $i:`date +%Y%m%d`
+        echo docker save -o /opt/$i:`date +%Y%m%d`.tar.gz $i:`date +%Y%m%d`
+done
+
+SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete /opt/*.tar.gz  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/docker-images/
+
+SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete /opt/jenkins-data  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/
+```
+### docker jenkins start
+`docker run -dit  -p 8083:8083 -p 50000:50000 -p 8080:8080 --name ngp-jenkins --restart always -v /opt/jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /usr/lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7   204.104.1.152:8102/ngp-jenkins `
+
+### docker sonarqube
+`docker run -dit --name sonarqube --restart always -p 9000:9000 -v /opt/sonarqube/_data:/opt/sonarqube/data sonarqube`
+
+### docker ngp-nexus
+`docker run -dit --name sonarqube --restart always -p 9999:9999 -p 8081:8081 -v /opt/nexus-data:/nexus-data ngp-nexus sonatype/nexus3 sh -c "${SONATYPE_DIR}/start-nexus-repository-manager.sh"`
+
+
+## dd/df/du
+- `dd if=test.tar of=test.tar2` like `cp`,`scp`,`rsync`
+- `df -h`   查看分区大小
+- `du --max-depth=1 -c -h` 查看文件夹大小
+
+## lscpu/lshw/lsmem
+
+### common usefull shortcuts
+
+1. ctl+r (inverse grep history)
+2. ctl+x,e (emacs)
+3. ctl+l  (clear)
+4. ctl+x,c (exit  emacs)
+5. mv test.{tar,tar.gz}
+6. curl ifconfig.me (external IP)-- hostname -I
+7. ctrl+a,ctl+e,ctl+u(clear before cursor),ctl+k (clear after)
+8. ctl+_ (undo),ctl+d (logout)
+9. ctl+b,ctl+f ,ctl+d(<--- ,----->) (alt+f,alt+b,alt+d move a word)
+10. time read (stop: ctl+d)
+11. ctl+z (current to background, fg)
+12. ctl+t,alt+t (swap a character/word)
+13. ctl+w (cut), ctl+y (pasted)
+14. alt+U,alt+L (upper/lower case)
+15. ctl+p (upper), ctl+n(next)
+16. alt+R (revert changes of a command which pull from history) 
+17. set -o vi / set -o emacs
+
+---
+
+
+
