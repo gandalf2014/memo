@@ -1,0 +1,64 @@
+#1 安装ruby 和fpm
+
+yum install gcc-c++ patch readline readline-devel zlib zlib-devel \
+   libyaml-devel libffi-devel openssl-devel make \
+   bzip2 autoconf automake libtool bison iconv-devel sqlite-devel
+
+yum install ruby-devel gcc make rpm-build rubygems
+
+gem install --no-document fpm
+
+
+curl -sSL https://rvm.io/mpapis.asc | gpg --import - 
+curl -sSL https://get.rvm.io | bash -s stable
+
+
+export https_proxy=10.8.22.153:7890
+export http_proxy=10.8.22.153:7890
+
+
+    curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+
+
+参考连接
+
+https://wp.huangshiyang.com/how-to-install-ruby-2-4-on-centos-rhel-7-6
+
+https://fpm.readthedocs.io/en/latest/source/dir.html
+
+=======================
+/usr/lib/.build-id
+/usr/lib/.build-id/24
+/usr/lib/.build-id/24/feec073432170368c4b3ccf5fb33e89acd3312
+/usr/lib/.build-id/7b
+/usr/lib/.build-id/7b/423b8bdbe46cdcb0d78dd864fca843ab4183e4
+/usr/lib/.build-id/92
+/usr/lib/.build-id/92/f8d1612f4c5cd4a12f97eed0938e92b611d8e4
+/usr/local/bin/wkhtmltoimage
+/usr/local/bin/wkhtmltopdf
+/usr/local/include/wkhtmltox/dllbegin.inc
+/usr/local/include/wkhtmltox/dllend.inc
+/usr/local/include/wkhtmltox/image.h
+/usr/local/include/wkhtmltox/pdf.h
+/usr/local/lib/libwkhtmltox.so
+/usr/local/lib/libwkhtmltox.so.0
+/usr/local/lib/libwkhtmltox.so.0.12
+/usr/local/lib/libwkhtmltox.so.0.12.6
+/usr/local/share/man/man1/wkhtmltoimage.1.gz
+/usr/local/share/man/man1/wkhtmltopdf.1.gz
+
+=============================
+/usr/local/bin/wkhtmltopdf https://www.huoyancredit.com/pages/biddingModules/bidding.html?gid=74492908ba8f4251ba376fd66ae41af3 /root/bid.pdf
+
+
+fpm --verbose -s rpm -t rpm -d fontconfig -d libX11 -d libXext -d libXrender -d libjpeg \
+ -d libpng -d xorg-x11-fonts-75dpi -d xorg-x11-fonts-Type1 \
+  -C /usr/share/fonts/chinese/TrueType \
+  -n wkhtmltox-dep   wkhtmltox-0.12.6-1.centos7.x86_64.rpm
+
+
+fpm -s dir -t rpm -n fonts /usr/share/fonts/chinese/TrueType
+
+
+fpm --verbose -s rpm -t rpm -d fonts-1.0-1.x86_64 -n wkhtmltopdf wkhtmltox-0.12.6-dep-0.12.6-1.centos7.x86_64.rpm

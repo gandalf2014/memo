@@ -1,6 +1,29 @@
 ## create user user
 `useradd -m -G root,wheel gandalf -p "234234#!qwq"`
 
+### user creation or remove
+```
+useradd -C "demo user" demo
+userdel -r demo
+
+passwd -S demo
+
+passwd -e demo 
+
+passwd -l demo
+
+passwd -u demo
+
+passwd -n 1 -x 90  -w 3 -i 10 demo 
+```
+
+
+### use `CURL` to test service is live
+
+```
+ curl -I -s www.tmall.com:443
+```
+
 ## simple httpserver
 `python -m SimpleHTTPServer`
 
@@ -70,7 +93,7 @@ SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --st
 SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --stats --delete /opt/nexus-data  gandalf@pln-cd1-ngp-dev3:/opt/devopsbackup/
 ```
 ---
-
+## for more details info about sshpass, read about https://www.redhat.com/sysadmin/ssh-automation-sshpass
 #### dev1 scripts
 ```shell
 #!/bin/bash
