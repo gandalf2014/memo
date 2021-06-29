@@ -483,18 +483,24 @@ if [ ${INS_COUNT} -gt 0 ]
 VAL611=$(${ORACLE_HOME}/bin/sqlplus -S "/ as sysdba" << EOF
 set linesize 158 pages 300
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 spool ${DB_BASELINE}
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='40%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT CONFIGURATION BASELINE FOR DATABASE: ${ORACLE_SID} [Collected on: ${LOGDATE}]
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT #################################### ########
+
 ${HASHNONHTML} PROMPT CONFIGURATION BASELINE FOR DATABASE: ${ORACLE_SID}
 ${HASHNONHTML} PROMPT #################################### ########
+
 ${HASHNONHTML} PROMPT [COLLECTED ON: ${LOGDATE}]
 ${HASHNONHTML} PROMPT 
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -502,9 +508,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT Database General Information:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT -----------------------------
+
 ${HASHNONHTML} PROMPT Database General Information:
 ${HASHNONHTML} PROMPT -----------------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -512,15 +521,18 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT INSTANCE INFO:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 PROMPT
 ${HASHNONHTML} PROMPT INSTANCE INFO:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^
+
 col INST_ID for 9999999
 col inst_name for a20
 col host_name for a30
 col BLOCKED for a7
 col STARTUP_TIME for a19
 select INST_ID,instance_name INS_NAME,STATUS,DATABASE_STATUS DB_STATUS,VERSION,INSTANCE_ROLE,LOGINS,BLOCKED,to_char(STARTUP_TIME,'DD-MON-YY HH24:MI:SS') STARTUP_TIME from gv\$instance;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -528,8 +540,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DATABASE INFO:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATABASE INFO:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^
+
 col name for a8
 col DB_UNIQUE_NAME for a14
 col FLASHBACK for a9
@@ -538,7 +552,9 @@ col "LOG_MODE | FORCE" for a18
 col "PLATFORM_NAME | ID" for a23
 col created for a9
 col RESETLOGS_TIME for a15
+
 select DBID,NAME, DB_UNIQUE_NAME, DATABASE_ROLE, PROTECTION_MODE, to_char(CREATED,'DD-MON-YY') CREATED, PLATFORM_NAME||' | '||PLATFORM_ID "PLATFORM_NAME | ID", LOG_MODE||' | '||FORCE_LOGGING "LOG_MODE | FORCE", FLASHBACK_ON FLASHBACK,OPEN_MODE, LAST_OPEN_INCARNATION# LAST_INCR#, to_char(RESETLOGS_TIME,'DD-MON-YY HH24:MI') RESETLOGS_TIME,CURRENT_SCN from v\$DATABASE;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -546,14 +562,17 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT INSTANCE NON-DEFAULT PARAMETERS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT INSTANCE NON-DEFAULT PARAMETERS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col INST_ID for 9999999
 col "PARAMETER_VALUE" for a130
 select  INST_ID,NAME||'='''||VALUE||'''' "PARAMETER_VALUE"
 from    gv\$parameter
 where   ISDEFAULT='FALSE'
 order   by INST_ID,NAME;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -561,11 +580,14 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DATABASE ENABLED FEATURES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATABASE ENABLED FEATURES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col PARAMETER for a45
 col value for a100
 select * from v\$option order by 2,1;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -573,25 +595,33 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DATABASE FEATURES USAGE HISTORY:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATABASE FEATURES USAGE HISTORY:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col name for a65
 select NAME,FIRST_USAGE_DATE,LAST_USAGE_DATE,DETECTED_USAGES,AUX_COUNT,ERROR_COUNT from SYS.wri\$_dbu_feature_usage order by 3,2;  
+
 PROMPT
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT DATABASE SETTINGS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATABASE SETTINGS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^
+
 col PROPERTY_NAME for a45
 col PROPERTY_VALUE for a100
 select PROPERTY_NAME,PROPERTY_VALUE from database_properties order by 1;
+
 col PRODUCT for a60
 col VERSION for a20
 select PRODUCT,VERSION from product_component_version;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -599,10 +629,13 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT BLOCK CHANGE TRACKING:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT BLOCK CHANGE TRACKING:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^
+
 col FILENAME for a80
 select * from v\$block_change_tracking;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -610,15 +643,20 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT ALL SERVICES: [DBA_SERVICES]
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ALL SERVICES: [DBA_SERVICES]
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^
+
 col SERVICE_NAME for a30
 col NETWORK_NAME for a40
 col FAILOVER_METHOD for a15
 col FAILOVER_TYPE for a15
 col ENABLED for a7
 col CLB_GOAL for a8
+
 select NAME SERVICE_NAME, NETWORK_NAME, ENABLED, FAILOVER_METHOD, FAILOVER_TYPE, GOAL, CLB_GOAL, to_char(CREATION_DATE,'DD-MON-YY') CREATED, AQ_HA_NOTIFICATIONS from dba_services order by 1;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -626,9 +664,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='40%' 
 ${HASHHTML} PROMPT CLUSTERWARE INTERCONNECT: [GV\$CLUSTER_INTERCONNECTS]
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT CLUSTERWARE INTERCONNECT: [GV\$CLUSTER_INTERCONNECTS]
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^
+
 select * from SYS.GV\$CLUSTER_INTERCONNECTS;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -636,12 +677,15 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT PATCHING HISTORY: [DBA_REGISTRY_HISTORY]
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT PATCHING HISTORY: [DBA_REGISTRY_HISTORY]
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^
+
 col ACTION_TIME for a19
 col "ACTION | COMMENT" for a80
 col VERSION for a12
 select to_char(ACTION_TIME,'DD-MON-YY HH24:MI:SS') ACTION_TIME, ACTION||' | '||COMMENTS "ACTION | COMMENT", VERSION from dba_registry_history;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -649,8 +693,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DATABASE LINKS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATABASE LINKS:
 ${HASHNONHTML} PROMPT ---------------
+
 col "OWNER | TARGET_USER" for a45
 col DB_LINK for a24
 col host for a60
@@ -661,6 +707,8 @@ select 	OWNER||' | '||USERNAME "OWNER | TARGET_USER",
 	to_char(CREATED,'MM/DD/YYYY HH24:MI:SS') created
 from  	dba_db_links
 order	by OWNER,DB_LINK;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -668,14 +716,19 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DIRECTORIES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DIRECTORIES:
 ${HASHNONHTML} PROMPT ------------
+
 col owner for a30
 col DIRECTORY_NAME for a35
 col DIRECTORY_PATH for a85
 select OWNER,DIRECTORY_NAME,DIRECTORY_PATH from DBA_DIRECTORIES;
+
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -683,9 +736,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT SECURITY SETTINGS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT -------------------
+
 ${HASHNONHTML} PROMPT SECURITY SETTINGS:
 ${HASHNONHTML} PROMPT -------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -693,8 +749,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT ACLS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ACLS:
 ${HASHNONHTML} PROMPT -----
+
 SET lines 160
 col host for a35
 col ACL for a30
@@ -714,8 +772,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT AUDIT SETTINGS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT AUDIT SETTINGS:
 ${HASHNONHTML} PROMPT --------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -723,9 +783,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT AUDITED SYSTEM PRIVILEGES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT AUDITED SYSTEM PRIVILEGES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Select user_name,PRIVILEGE,success,failure from DBA_PRIV_AUDIT_OPTS order by 1,2;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -733,10 +796,13 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT AUDITED OBJECT PRIVILEGES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT AUDITED OBJECT PRIVILEGES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col "OWNER.OBJECT_NAME" for a30
 select OWNER||'.'||OBJECT_NAME "OWNER.OBJECT_NAME",OBJECT_TYPE,ALT,AUD,COM,DEL,GRA,IND,INS,LOC,REN,SEL,UPD,REF,EXE,CRE,REA,WRI,FBK from DBA_OBJ_AUDIT_OPTS order by 1;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -744,11 +810,16 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT FINE GRAINED AUDITING SETTINGS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT FINE GRAINED AUDITING SETTINGS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Select POLICY_NAME,ENABLED,OBJECT_SCHEMA,OBJECT_NAME,POLICY_COLUMN from DBA_AUDIT_POLICIES;
+
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -756,9 +827,13 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT USERS AND PROFILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
+
 ${HASHNONHTML} PROMPT --------------------
+
 ${HASHNONHTML} PROMPT USERS AND PROFILES:
 ${HASHNONHTML} PROMPT --------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -766,8 +841,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT USERS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT USERS:
 ${HASHNONHTML} PROMPT ^^^^^
+
 set lines 160 pages 300
 col USERNAME for a21
 col ACCOUNT_STATUS for a20
@@ -781,6 +858,7 @@ col LIMIT for a30
 select u.USERNAME,u.ACCOUNT_STATUS,u.PROFILE,u.DEFAULT_TABLESPACE||' | '||u.TEMPORARY_TABLESPACE "DEFAULT | TEMPORARY TABLESPACE",to_char(u.EXPIRY_DATE,'DD-MON-YY')EXPIRY_DATE,to_char(u.LOCK_DATE,'DD-MON-YY')LOCK_DATE,s.PASSWORD HASH,
 to_char(CTIME,'DD-MON-YY') ||' | '||to_char(s.PTIME,'DD-MON-YY') "CREATE_DATE | PASS_LAST_CHANGE"
 from sys.dba_users u, sys.user\$ s where u.username=s.name order by 1;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -788,10 +866,14 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT PROFILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT PROFILES:
 ${HASHNONHTML} PROMPT ^^^^^^^^
+
 col PROFILE for a35
 select * from dba_profiles order by profile,resource_name;
+
+
 PROMPT 
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -799,8 +881,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT NUMBER OF OBJECTS IN EACH SCHEMA:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT NUMBER OF OBJECTS IN EACH SCHEMA:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col USERNAME for a25
 select 	USERNAME,
 	count(decode(o.TYPE#, 2,o.OBJ#,'')) Tables,
@@ -818,6 +902,7 @@ from 	SYS.obj\$ o,
 where 	u.USER_ID = o.OWNER# (+)
 group	by USERNAME
 order	by USERNAME;
+
 PROMPT 
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -825,8 +910,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT SCHEMAS SIZE:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT SCHEMAS SIZE:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^
+
 set pages 999
 col "size MB" format 999,999,999
 col "Objects" format 999,999,999
@@ -838,6 +925,7 @@ from 	(select owner, count(*) obj_cnt from dba_objects group by owner) obj
 	from dba_segments group by owner) seg
 where 	obj.owner  = seg.owner(+)
 order	by 3 desc ,2 desc, 1;
+
 PROMPT 
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -845,12 +933,15 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT BIGGEST 100 OBJECTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT BIGGEST 100 OBJECTS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^
+
 col owner for a35
 col tablespace_name format a35
 col segment_name for a35
 Select * from (select OWNER,SEGMENT_NAME,SEGMENT_TYPE,TABLESPACE_NAME,BYTES/1024/1024 SIZE_MB from dba_segments order by 5 desc)where rownum <101 order by SIZE_MB desc;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -858,9 +949,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT Super Users:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT -------------
+
 ${HASHNONHTML} PROMPT Super Users:
 ${HASHNONHTML} PROMPT -------------
+
 PROMPT 
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -868,23 +962,33 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT SYSDBA USERS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT SYSDBA USERS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^
+
 select * from v\$pwfile_users;
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT DBA USERS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DBA USERS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^
+
 select GRANTEE,GRANTED_ROLE from dba_role_privs where granted_role='DBA' order by 1;
+
 --PROMPT
 --${HASHNONHTML} PROMPT USERS PERMISSIONS:
 --${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^
+
+
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -892,9 +996,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT PHYSICAL STRUCTURE:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT --------------------
+
 ${HASHNONHTML} PROMPT PHYSICAL STRUCTURE:
 ${HASHNONHTML} PROMPT --------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -902,12 +1009,15 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT CONTORLFILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT --------------
+
 ${HASHNONHTML} PROMPT CONTORLFILES:
 ${HASHNONHTML} PROMPT --------------
  
 col name for a120
 select NAME from V\$CONTROLFILE;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -918,7 +1028,9 @@ ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<ti
  
 ${HASHNONHTML} PROMPT REDOLOG GROUPS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^
+
 select THREAD#,GROUP#,MEMBERS,BLOCKSIZE,BYTES/1024/1024"SIZE_MB" from v\$log order by THREAD#,GROUP#;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -926,10 +1038,13 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT REDOLOG FILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT REDOLOG FILES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^
+
 col MEMBER for a120
 select GROUP#,TYPE,MEMBER from v\$logfile order by GROUP#;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -937,9 +1052,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT TABLESPACES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ------------
+
 ${HASHNONHTML} PROMPT Tablespaces:
 ${HASHNONHTML} PROMPT ------------
+
 col FORCE_LOGGING for a13
 col EXTENT_MANAGEMENT for a12
 col ALLOCATION_TYPE for a15
@@ -947,8 +1065,10 @@ col SEG_SPACE_MANAG for a15
 col BIGFILE for a7
 col COMPRESSED for a10
 col ENCRYPTED for a4
+
 select TABLESPACE_NAME,BLOCK_SIZE,STATUS,CONTENTS,LOGGING,FORCE_LOGGING,EXTENT_MANAGEMENT,ALLOCATION_TYPE,SEGMENT_SPACE_MANAGEMENT SEG_SPACE_MANAG,BIGFILE,DEF_TAB_COMPRESSION COMPRESSED,ENCRYPTED from dba_tablespaces
 order by TABLESPACE_NAME;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -956,18 +1076,23 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DATAFILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DATAFILES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^
+
 col FILE_NAME for a90
 select TABLESPACE_NAME,FILE_NAME,BYTES/1024/1024 SIZE_MB,MAXBYTES/1024/1024 MAXSIZE_MB,ONLINE_STATUS from dba_data_files order by 1;
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT TABLESPACES UTILIZATION:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT TABLESPACES UTILIZATION:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^
+
 col tablespace_name for A25
 col Total_MB for 999999999999
 col Used_MB for 999999999999
@@ -981,14 +1106,17 @@ select tablespace_name,
        (used_space*$blksize)/(1024*1024) Used_MB,
        used_percent "%Used"
 from dba_tablespace_usage_metrics;
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT ASM DISKGROUPS AND DISKFILES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ASM DISKGROUPS AND DISKFILES:
 ${HASHNONHTML} PROMPT ------------------------------
+
 set lines 160
                 col DISK_FILE_PATH for a40
                 col DISK_GROUP_NAME for a15
@@ -1007,6 +1135,8 @@ set lines 160
                 , b.failgroup       	fail_group
                 ,b.TOTAL_MB, b.COLD_USED_MB, b.FREE_MB, b.COLD_USED_MB*100/b.TOTAL_MB "PCT_USED%"
                 FROM v\$asm_diskgroup a RIGHT OUTER JOIN v\$asm_disk b USING (group_number) ORDER BY a.name, b.path;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1014,21 +1144,28 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT FRA_SIZE:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT FRA_SIZE:
 ${HASHNONHTML} PROMPT ---------
+
 col name for a25
 SELECT NAME,NUMBER_OF_FILES,SPACE_LIMIT/1024/1024/1024 AS TOTAL_SIZE_GB,SPACE_USED/1024/1024/1024 SPACE_USED_GB,
 SPACE_RECLAIMABLE/1024/1024/1024 SPACE_RECLAIMABLE_GB,ROUND((SPACE_USED-SPACE_RECLAIMABLE)/SPACE_LIMIT * 100, 1) AS "%FULL_AFTER_CLAIM",
 ROUND((SPACE_USED)/SPACE_LIMIT * 100, 1) AS "%FULL_NOW" FROM V\$RECOVERY_FILE_DEST;
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT FRA_COMPONENTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT FRA_COMPONENTS:
 ${HASHNONHTML} PROMPT ---------------
+
 select * from v\$flash_recovery_area_usage;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1036,14 +1173,19 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT RMAN CONFIGURATIONS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ----------------------
+
 ${HASHNONHTML} PROMPT RMAN CONFIGURATIONS:
 ${HASHNONHTML} PROMPT ----------------------
+
 col name for a45
 col VALUE for a100
 select name, value from v\$rman_configuration;
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1051,9 +1193,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT Active Incidents:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ----------------------
+
 ${HASHNONHTML} PROMPT Active Incidents:
 ${HASHNONHTML} PROMPT ----------------------
+
 set linesize 158
 col PROBLEM_KEY for a65
 select PROBLEM_KEY,to_char(FIRSTINC_TIME,'DD-MON-YY HH24:mi:ss') FIRST_OCCURENCE,to_char(LASTINC_TIME,'DD-MON-YY HH24:mi:ss')
@@ -1065,11 +1210,15 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT OUTSTANDING ALERTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT OUTSTANDING ALERTS:
 ${HASHNONHTML} PROMPT --------------------------
+
 select * from DBA_OUTSTANDING_ALERTS;
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1077,9 +1226,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT SCHEDULED JOBS STATUS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ------------------------------------
+
 ${HASHNONHTML} PROMPT SCHEDULED JOBS STATUS:
 ${HASHNONHTML} PROMPT ------------------------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1087,21 +1239,26 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DBMS_JOBS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DBMS_JOBS:
 ${HASHNONHTML} PROMPT ----------
+
 set linesize 158
 col LAST_RUN for a25
 col NEXT_RUN for a25
 select job,schema_user,failures,to_char(LAST_DATE,'DD-Mon-YYYY hh24:mi:ss')LAST_RUN,to_char(NEXT_DATE,'DD-Mon-YYYY hh24:mi:ss')NEXT_RUN from dba_jobs;
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT DBMS_SCHEDULER:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT 
 ${HASHNONHTML} PROMPT DBMS_SCHEDULER:
 ${HASHNONHTML} PROMPT ---------------
+
 col OWNER for a15
 col JOB_NAME for a30
 col STATE for a10
@@ -1117,6 +1274,7 @@ lpad(extract(hour from last_run_duration),2,'0')||':'||
 lpad(extract(minute from last_run_duration),2,'0')||':'||
 lpad(round(extract(second from last_run_duration)),2,'0') "DURATION(d:hh:mm:ss)"
 from dba_scheduler_jobs where JOB_NAME NOT LIKE 'AQ$_PLSQL_NTFN%' order by ENABLED,STATE;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1124,8 +1282,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='35%' 
 ${HASHHTML} PROMPT AUTOTASK INTERNAL MAINTENANCE WINDOWS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT AUTOTASK INTERNAL MAINTENANCE WINDOWS:
 ${HASHNONHTML} PROMPT --------------------------------------
+
 col WINDOW_NAME for a17
 col NEXT_RUN for a20
 col ACTIVE for a6
@@ -1134,6 +1294,7 @@ col SEGMENT_ADVISOR for a15
 col SQL_TUNE_ADVISOR for a16
 col HEALTH_MONITOR for a15
 SELECT WINDOW_NAME,TO_CHAR(WINDOW_NEXT_TIME,'DD-MM-YYYY HH24:MI:SS') NEXT_RUN,AUTOTASK_STATUS STATUS,WINDOW_ACTIVE ACTIVE,OPTIMIZER_STATS,SEGMENT_ADVISOR,SQL_TUNE_ADVISOR,HEALTH_MONITOR FROM DBA_AUTOTASK_WINDOW_CLIENTS;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1141,8 +1302,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='35%' 
 ${HASHHTML} PROMPT FAILED DBMS_SCHEDULER JOBS IN THE LAST 24H:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT FAILED DBMS_SCHEDULER JOBS IN THE LAST 24H:
 ${HASHNONHTML} PROMPT -------------------------------------------
+
 col LOG_DATE for a36
 col OWNER for a15
 col JOB_NAME for a35
@@ -1150,8 +1313,10 @@ col STATUS for a11
 col RUN_DURATION for a20
 col ID for 99
 select INSTANCE_ID ID,JOB_NAME,OWNER,LOG_DATE,STATUS,ERROR#,RUN_DURATION from DBA_SCHEDULER_JOB_RUN_DETAILS where LOG_DATE > sysdate-1 and STATUS='FAILED' order by JOB_NAME,LOG_DATE;
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1159,16 +1324,21 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT ADVISORS STATUS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ------------------------------
+
 ${HASHNONHTML} PROMPT ADVISORS STATUS:
 ${HASHNONHTML} PROMPT ------------------------------
+
 col CLIENT_NAME for a40
 col window_group for a30
 col STATUS for a15
 col CONSUMER_GROUP for a25
 SELECT client_name, status, consumer_group, window_group FROM dba_autotask_client ORDER BY client_name;
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1176,13 +1346,18 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='25%' 
 ${HASHHTML} PROMPT CURRENT OS / HARDWARE STATISTICS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT --------------------------------------------------------
+
 ${HASHNONHTML} PROMPT CURRENT OS / HARDWARE STATISTICS:
 ${HASHNONHTML} PROMPT --------------------------------------------------------
+
 col value for 99999999999999999999999
 select stat_name,value from v\$osstat;
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 PROMPT
 ${HASHHTML} SET PAGES 1000
@@ -1191,13 +1366,17 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT RESOURCE LIMIT:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT --------------------------------
+
 ${HASHNONHTML} PROMPT RESOURCE LIMIT:
 ${HASHNONHTML} PROMPT --------------------------------
+
 col INST_ID for 9999999
 col INITIAL_ALLOCATION for a20
 col LIMIT_VALUE for a20
 select * from gv\$resource_limit order by RESOURCE_NAME;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1205,14 +1384,19 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT RECYCLEBIN OBJECTS#
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT --------------------------------
+
 ${HASHNONHTML} PROMPT RECYCLEBIN OBJECTS#:
 ${HASHNONHTML} PROMPT --------------------------------
+
 set feedback off
 select count(*) "RECYCLED_OBJECTS#",sum(space)*$blksize/1024/1024 "TOTAL_SIZE_MB" from dba_recyclebin group by 1;
 set feedback on
 ${HASHNONHTML} PROMPT
 PROMPT [Note: Consider purging DBA_RECYCLEBIN for better performance]
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1220,14 +1404,19 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT FLASHBACK RESTORE POINTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ------------------------------------------
+
 ${HASHNONHTML} PROMPT FLASHBACK RESTORE POINTS:
 ${HASHNONHTML} PROMPT ------------------------------------------
+
 col TIME for a35
 col RESTORE_POINT_TIME for a17
 col "DATABASE_INCARNATION#" heading "DB_INCR#" for 99999999
 col RESTORE_POINT_TIME for a18
 select * from V\$RESTORE_POINT;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1235,23 +1424,33 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT HEALTH MONITOR:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT ----------------------------------
+
 ${HASHNONHTML} PROMPT HEALTH MONITOR:
 ${HASHNONHTML} PROMPT ----------------------------------
+
 select * from V\$HM_RECOMMENDATION where time_detected > sysdate -1;
+
+
 PROMPT
 ${HASHNONHTML} PROMPT ========================================================================================================
+
 PROMPT
 PROMPT
+
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
 ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' align='left' summary='Script output'> <tr> <th scope="col">
 ${HASHHTML} PROMPT OBJECTS HIGHLIGHTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='3' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT -------------------
+
 ${HASHNONHTML} PROMPT OBJECTS HIGHLIGHTS:
 ${HASHNONHTML} PROMPT -------------------
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1259,13 +1458,16 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT INVALID OBJECTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT INVALID OBJECTS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^
+
 col SUBOBJECT_NAME for a30
 col status for a15
 col "OWNER.OBJECT_NAME" for a55
 col LAST_DDL_TIME for a20
 select OWNER||'.'||OBJECT_NAME "OWNER.OBJECT_NAME",SUBOBJECT_NAME,OBJECT_TYPE,status,to_char(LAST_DDL_TIME,'DD-MON-YY HH24:mi:ss') LAST_DDL_TIME from DBA_INVALID_OBJECTS;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1273,11 +1475,15 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT UNUSABLE INDEXES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT UNUSABLE INDEXES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^
+
 col INDEX_NAME for a50
 col TABLE_NAME for a50
 select owner||'.'||INDEX_NAME "INDEX_NAME",INDEX_TYPE,TABLE_OWNER||'.'||TABLE_NAME "TABLE_NAME",COMPRESSION,TABLESPACE_NAME from dba_indexes where status='UNUSABLE';
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1285,8 +1491,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='25%' 
 ${HASHHTML} PROMPT FOREIGN KEY COLUMNS WITHOUT INDEXES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT FOREIGN KEY COLUMNS WITHOUT INDEXES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 set linesize 158
 col TABLE_NAME for a35
 col CONSTRAINT_NAME for a35
@@ -1310,6 +1518,7 @@ and     not exists (
         and     b.COLUMN_NAME = acc.COLUMN_NAME
         and     b.COLUMN_POSITION = acc.POSITION)
 order   by acc.OWNER, acc.CONSTRAINT_NAME, acc.COLUMN_NAME, acc.POSITION;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1317,8 +1526,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT DISABLED CONSTRAINTS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT DISABLED CONSTRAINTS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^
+
 column OWNER format A20 Heading "OWNER"
 column TABLE_NAME format A35 Heading "TABLE_NAME"
 column CONSTRAINT_NAME format A35 Heading "CONSTRAINT_NAME"
@@ -1336,6 +1547,8 @@ select  OWNER,
 from    dba_constraints
 where   STATUS = 'DISABLED' and OWNER <> 'SYSTEM'
 order   by OWNER, TABLE_NAME, CONSTRAINT_NAME;
+
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1343,13 +1556,16 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT Monitored INDEXES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT Monitored INDEXES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^
+
 col Index_NAME for a40
 col TABLE_NAME for a40
         select io.name Index_NAME, t.name TABLE_NAME,decode(bitand(i.flags, 65536),0,'NO','YES') Monitoring,
         decode(bitand(ou.flags, 1),0,'NO','YES') USED,ou.start_monitoring,ou.end_monitoring
         from sys.obj$ io,sys.obj$ t,sys.ind$ i,sys.object_usage ou where i.obj# = ou.obj# and io.obj# = ou.obj# and t.obj# = i.bo# order by 1;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1357,9 +1573,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT COMPRESSED TABLES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT COMPRESSED TABLES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^
+
 SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,COMPRESSION,COMPRESS_FOR FROM DBA_TABLES WHERE COMPRESSION='ENABLED' AND OWNER <> 'SYSMAN' ORDER BY OWNER;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1367,13 +1586,16 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT PARTITIONED TABLES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT PARTITIONED TABLES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^
+
 col table_name format a40
 select	owner,table_name,DEF_TABLESPACE_NAME,partitioning_type,partition_count
 from	dba_part_tables
 where	owner not in ('SYS','SYSTEM','SYSMAN','SQLTXPLAIN')
 order by owner;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1381,9 +1603,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT IOT TABLES:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT IOT TABLES:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^
+
 select owner,table_name,IOT_TYPE from dba_tables where IOT_TYPE='IOT' and owner not in ('SYS','EXFSYS','DBSNMP','WMSYS','CTXSYS','SYSMAN');
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1391,13 +1616,16 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='60%' 
 ${HASHHTML} PROMPT OBJECTS WITH NON-DEFAULT DEGREE OF PARALLELISM: [Query from: http://blog.tanelpoder.com/?s=index+rebuild]
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT OBJECTS WITH NON-DEFAULT DEGREE OF PARALLELISM: [Query from: http://blog.tanelpoder.com/?s=index+rebuild]
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 col DEGREE for a6
 SELECT 'INDEX' OBJECT_TYPE, OWNER, INDEX_NAME, TRIM(DEGREE) DEGREE FROM DBA_INDEXES WHERE TRIM(DEGREE) > TO_CHAR(1)
 UNION ALL
 SELECT 'TABLE', OWNER, TABLE_NAME, TRIM(DEGREE) DEGREE FROM DBA_TABLES WHERE TRIM(DEGREE) > TO_CHAR(1)
 order by 1,2;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1405,8 +1633,10 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='25%' 
 ${HASHHTML} PROMPT OBJECTS WITH NOLOGGING OPTION:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT OBJECTS WITH NOLOGGING OPTION:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 SELECT 'INDEX' OBJECT_TYPE, OWNER, INDEX_NAME, LOGGING FROM DBA_INDEXES
 WHERE LOGGING='NO' AND TEMPORARY='N'
 AND owner not in ('SYS','XDB','DBSNMP','SQLTXPLAIN','WMSYS','SYSMAN','SYSTEM','MDSYS','EXFSYS')
@@ -1415,6 +1645,7 @@ SELECT 'TABLE', OWNER, TABLE_NAME, LOGGING FROM DBA_TABLES
 WHERE LOGGING='NO' AND TEMPORARY='N'
 AND owner not in ('SYS','XDB','DBSNMP','SQLTXPLAIN','WMSYS','SYSMAN','SYSTEM','MDSYS','EXFSYS')
 order by 1,2;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1422,9 +1653,12 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT CORRUPTED BLOCKS:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT CORRUPTED BLOCKS:
 ${HASHNONHTML} PROMPT ^^^^^^^^^^^^^^^^
+
 select * from V\$DATABASE_BLOCK_CORRUPTION;
+
 PROMPT
 ${HASHHTML} SET PAGES 1000
 ${HASHHTML} SET MARKUP HTML OFF SPOOL OFF
@@ -1432,10 +1666,14 @@ ${HASHHTML} PROMPT <br> <p> <table border='3' bordercolor='#E67E22' width='20%' 
 ${HASHHTML} PROMPT CONTROLFILE TRACE BACKUP:
 ${HASHHTML} PROMPT </td> </tr> </table> <p> <br>
 ${HASHHTML} SET WRAP OFF ECHO OFF FEEDBACK OFF MARKUP HTML ON SPOOL ON HEAD '<title></title> <style type="text/css"> table { font-size: 80%; } th { background: #AF601A; } </style>' TABLE "border='2' bordercolor='#E67E22'" ENTMAP OFF
+
 ${HASHNONHTML} PROMPT CONTROLFILE TRACE BACKUP:
 ${HASHNONHTML} PROMPT -------------------------
+
 set feedback off
 ALTER DATABASE BACKUP CONTROLFILE TO TRACE AS '${LOG_DIR}/Controlfile_Trc_Bkp_${DB_NAME}.trc' REUSE NORESETLOGS;
+
+
 spool off
 exit;
 EOF
@@ -1489,10 +1727,13 @@ set trim on
 set echo off
 col USERNAME for a30
 col account_status for a23
+
 PROMPT
 ${HASHNONHTML} PROMPT --------------------------------------
+
 ${HASHNONHTML} PROMPT -- USER [${USERNAME}]
 ${HASHNONHTML} PROMPT --------------------------------------
+
 PROMPT
 select a.username,a.account_status,a.profile,q.tablespace_name,q.bytes/1024/1024 USED_MB, q.max_bytes "MAX_QUOTA_Bytes" from dba_users a, dba_ts_quotas q where a.username=q.username and a.username='${USERNAME}';
 set pages 0
