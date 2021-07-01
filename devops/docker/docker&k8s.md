@@ -35,3 +35,8 @@
 
 
 > **container no need to map port to local cause there just access by others container, use --link to connect them. or docker network connect to customerized bidge(default is docker0)**
+
+
+## docker-in-docker (dind) docker-out-of-docker (dood)
+- ### `docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker`
+- ### ``

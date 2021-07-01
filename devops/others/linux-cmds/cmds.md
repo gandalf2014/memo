@@ -151,6 +151,18 @@ SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --st
 tr -s " "  
 tr -d " "
 
+### 获取普通用户名
+`eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1`
+
+### 获取空密码的用户
+`awk -F":" '($2 == "!!" || $2 == "*") {print $1}' /etc/shadow`
+
+### 锁定账户 并过期
+`passwd -l test1 && chage -E0 test1 && usermod -s /sbin/nologin test1`
+
+### 去除#
+grep '^[^# ]' /etc/security/pwquality.conf
+
 
 ## echo 变换颜色输出
 [root@centos7 data]# red=`tput setaf 1`
@@ -159,4 +171,9 @@ tr -d " "
 [root@centos7 data]# echo "${red}red text ${green}green text${reset}"
 red text green text
 
+## sudoers
+Syntax : User <space> OnHost = (Runas-User:Group) <space> Commands
+Example: root ALL = (ALL:ALL) ALL
 
+###
+> 个人理解：uid是实际用户id，每个文件都会有一个uid； 用户在登录的过程中，使用的是uid。用户在执行文件时，pID对应的uid就是用户的uid；  euid是用户的有效id，在执行文件的时候，由于权限的问题，某个进程的uid需要‘变为’其他用户才可以执行，这时‘变身’后的用户id及就是euid。 在没有‘变身’的情况下，euid=uid. suid标示一个文件可以被另一个文件使用‘变身’的策略使用它的权限 ，比如上面的/etc/passwd 文件，其他用户只有执行的权限，但是没有读取得权限，其他非root用户在执行的时候，由于文件设置了suid，则执行过程中euid可以被更改为root,这样就可以访问了 。
