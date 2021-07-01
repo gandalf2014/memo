@@ -19,7 +19,12 @@ echo --------------------------------------------------------------------------
 echo "本机的ip地址是："
 #ifconfig | grep --color "\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}"
 hostname -I
-echo --------------------------------------------------------------------------
+echo ------------------------扫描禁止root远程登陆--------------------------------
+if more /etc/ssh/sshd_config | grep "^PermitRootLogin"; then
+    more /etc/ssh/sshd_config | grep "PermitRootLogin" | tr -s " " | awk '{if($2="yes"){print "未禁用root远程登陆"}else{print "已禁用root远程登陆"}}'
+else
+    echo "已禁用root远程登陆"
+fi
 echo ---------------------------------------扫描系统空账户-----------------------
 awk -F":" '($2 == "!!" || $2 == "*") {print "账户"$1"是空账户,请管理员检查是否需要锁定或者删除它"}' /etc/shadow
 #normal_usr_accounts=`eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1`

@@ -147,5 +147,16 @@ SSHPASS=Fl2pOVMYLgA1hQyCIH3i rsync --rsh='sshpass -e ssh -l gandalf' -avzrP --st
 
 ---
 
+### 删除空格
+tr -s " "  
+tr -d " "
+
+
+## echo 变换颜色输出
+[root@centos7 data]# red=`tput setaf 1`
+[root@centos7 data]# green=`tput setaf 2`
+[root@centos7 data]# reset=`tput sgr0`
+[root@centos7 data]# echo "${red}red text ${green}green text${reset}"
+red text green text
 
 
