@@ -175,5 +175,17 @@ red text green text
 Syntax : User <space> OnHost = (Runas-User:Group) <space> Commands
 Example: root ALL = (ALL:ALL) ALL
 
+
+## 删除空行
+awk NF
+
+
+## 用户登录失败3次锁定账户
+> https://www.golinuxhub.com/2018/08/how-to-lock-or-unlock-root-normal-user-pamtally2-pamfaillock-linux/
+
+> `authconfig --passalgo=sha512 --passminlen=17 --passminclass=3 --passmaxrepeat=2 --passmaxclassrepeat=10 \
+ --enablereqlower --enablerequpper --enablereqdigit --enablereqother --enablefaillock \
+ --faillockargs="deny=3 even_deny_root unlock_time=60" --update`
+### 解锁 faillock --user test8 --reset  /  pam_tally2 --user test8 --reset
 ###
 > 个人理解：uid是实际用户id，每个文件都会有一个uid； 用户在登录的过程中，使用的是uid。用户在执行文件时，pID对应的uid就是用户的uid；  euid是用户的有效id，在执行文件的时候，由于权限的问题，某个进程的uid需要‘变为’其他用户才可以执行，这时‘变身’后的用户id及就是euid。 在没有‘变身’的情况下，euid=uid. suid标示一个文件可以被另一个文件使用‘变身’的策略使用它的权限 ，比如上面的/etc/passwd 文件，其他用户只有执行的权限，但是没有读取得权限，其他非root用户在执行的时候，由于文件设置了suid，则执行过程中euid可以被更改为root,这样就可以访问了 。

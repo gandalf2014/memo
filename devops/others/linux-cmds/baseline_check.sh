@@ -61,12 +61,12 @@ else
 echo "未指定密码策略：不能使用最近6次使用过的密码"
 fi
 echo --------------------------------扫描未锁定账户密码定期修改策略-----------------------
-more /etc/login.defs | grep -E "PASS_MAX_DAYS" | grep -v "#" |awk -F' '  '{if($2!=90){print "/etc/login.defs里面的"$1 "设置的是"$2"天，请管理员改成90天。"}}'
+more /etc/login.defs | grep -E "PASS_MAX_DAYS" | grep -v "#" |awk -F' '  '{if($2>90){print "/etc/login.defs里面的"$1 "设置的是"$2"天，请管理员改成90天。"}}'
 awk -F":" '{if($2!~/^!|^*/ && $5>90){print "("$1")" " 是一个未被锁定的账户，密码最大有效期是"$5"。请修改为90天"}}' /etc/shadow
 echo ----------------------------------------------------------------------------------
-more /etc/login.defs | grep -E "PASS_MIN_LEN" | grep -v "#" |awk -F' '  '{if($2!=16){print "/etc/login.defs里面的"$1 "设置的是"$2"个字符，请管理员改成16个字符。"}}'
+more /etc/login.defs | grep -E "PASS_MIN_LEN" | grep -v "#" |awk -F' '  '{if($2<16){print "/etc/login.defs里面的"$1 "设置的是"$2"个字符，请管理员改成16个字符。"}}'
 echo ----------------------------------------------------------------------------------
-more /etc/login.defs | grep -E "PASS_WARN_AGE" | grep -v "#" |awk -F' '  '{if($2!=10){print "/etc/login.defs里面的"$1 "设置的是"$2"天，请管理员将口令到期警告天数改成10天。"}}'
+more /etc/login.defs | grep -E "PASS_WARN_AGE" | grep -v "#" |awk -F' '  '{if($2<10){print "/etc/login.defs里面的"$1 "设置的是"$2"天，请管理员将口令到期警告天数改成10天。"}}'
 echo --------------------------------------------------------------------------
 grep TMOUT /etc/profile /etc/bashrc > /dev/null|| echo "未设置登录超时限制，请设置之，设置方法：在/etc/profile或者/etc/bashrc里面添加TMOUT=600参数"
 echo ----------------------------扫描特定的IP连接SSH-------------------------------------
@@ -77,7 +77,7 @@ echo "未限定IP访问SSH"
 fi
 echo ------------------------扫描禁止root远程登陆--------------------------------
 if more /etc/ssh/sshd_config | grep "^PermitRootLogin"; then
-    more /etc/ssh/sshd_config | grep "PermitRootLogin" | tr -s " " | awk '{if($2="yes"){print "未禁用root远程登陆"}else{print "已禁用root远程登陆"}}'
+    more /etc/ssh/sshd_config | grep "^PermitRootLogin" | tr -s " " | awk '{if($2=="yes"){print "未禁用root远程登陆"}else{print "已禁用root远程登陆"}}'
 else
     echo "已禁用root远程登陆"
 fi
