@@ -1,5 +1,5 @@
 #!/bin/bash
-#read key
+set -Eeuxo pipefail
 echo "警告：本脚本只是一个检查的操作，未对服务器做任何修改，管理员可以根据此报告进行相应的设置。"
 if [[ "$EUID" -ne 0 ]]; then 
 		echo "请以root身份运行基线检查" 
@@ -9,7 +9,7 @@ fi
 user_id=$(whoami)
 echo "当前扫描用户：${user_id}"
 
-scanner_time=$(date "+%Y-%m-%d %H:%M:%S")
+scanner_time=$(date '+%F %T')
 echo "当前扫描时间：${scanner_time}"
 
 echo ---------------------------------------OS版本检查-------------------------

@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#set -Eeuxo pipefail
 #系统账号
 # 1)删除空密码的账号
 # 2)删除或锁定非（系统与服务）帐户
@@ -18,10 +18,10 @@ fi
 
 
 #
-user_id=whoami
+user_id=$(whoami)
 echo ="当前扫描用户：${user_id}"
 
-scanner_time=date '+%Y-%m-%d %H:%M:%S'
+scanner_time=$(date '+%F %T')
 echo "当前扫描时间：${scanner_time}"
 
 echo -----------------------------开始备份文件------------------------------------------
@@ -33,10 +33,8 @@ cp /etc/issue.net /etc/issue.net.bak
 cp /etc/shadow /etc/shadow.bak
 cp /etc/passwd /etc/passwd.bak
 cp /etc/pam.d/passwd  /etc/pam.d/passwd.bak
-cp /etc/pam.d/common-password /etc/pam.d/common-password.bak
 cp /etc/host.conf /etc/host.conf.bak
 cp /etc/hosts.allow /etc/hosts.allow.bak
-cp /etc/ntp.conf /etc/ntp.conf.bak
 cp -p /etc/sysctl.conf /etc/sysctl.conf.bak
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 cp /etc/profile /etc/profile.bak
@@ -72,9 +70,7 @@ echo ----------------------------------设置SSH会话超时10min---------------
 if grep TMOUT /etc/profile /etc/bashrc > /dev/null; then
 echo "已启用SSH会话超时"
 else
-echo "TMOUT=300" >> /etc/profile
-echo "readonly TMOUT" >>/etc/profile
-echo "export TMOUT" >> /etc/profile
+echo -e "TMOUT=300\nreadonly TMOUT\nexport TMOUT" >> /etc/profile
 fi
 echo ----------------------------扫描特定的IP连接SSH-------------------------------------
 if more  /etc/ssh/sshd_config | grep AllowUsers ; then
