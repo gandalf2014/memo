@@ -27,8 +27,8 @@
 # vagrant plugin install vagrant-vbguest
 
 # enable proxy
-- export http_proxy=http://192.168.33.140:7890
-- export https_proxy=https://192.168.33.140:7890
+export http_proxy=http://10.8.22.153:7890
+export https_proxy=http://10.8.22.153:7890
 
 - yum update -y
 
