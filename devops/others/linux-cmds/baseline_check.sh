@@ -159,7 +159,7 @@ fi
 echo "当hosts.allow和 host.deny相冲突时，以hosts.allow设置为准。"
 echo -------------------------------------------------------------------------
 echo "查看shell是否设置超时锁定策略"
-if more /etc/profile | grep -E "TIMEOUT= "; then
+if more /etc/profile | grep -E "^TMOUT=300"; then
 echo  "系统设置了超时锁定策略 "
 else
 echo  "未设置超时锁定策略 "

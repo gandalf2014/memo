@@ -18,6 +18,8 @@
 - cd /media/
 - ./VBoxLinuxAdditions.run 
 
+- 在virtualbox中手动指定共享目录 固定分配，自动挂载
+
 
 
 
@@ -32,6 +34,9 @@ export https_proxy=http://10.8.22.153:7890
 
 - yum update -y
 
+
+# ubuntu install desktop-gui
+apt-get install lubuntu-desktop -y
 
 
 

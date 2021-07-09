@@ -34,8 +34,10 @@ more /etc/os-release | grep "^ID=ubuntu" && cmd="apt-get"
  ## simple scripts
 export http_proxy=http://10.8.22.153:7890
 export https_proxy=http://10.8.22.153:7890
+yum install zsh wget git -y
  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
  sed -i "s/^ZSH_THEME=.*/ZSH_THEME='risto'/" ~/.zshrc 
  sed -i "s/# ZSH_THEME_RANDOM_CANDIDATES/ZSH_THEME_RANDOM_CANDIDATES/" ~/.zshrc 
  sed -i "56d; 56i plugins=(git extract web-search yum git-extras docker vagrant colored-man-pages \
  colorize command-not-found docker man rsync rvm vagrant-prompt)"  ~/.zshrc 
+ source ~/.zshrc
