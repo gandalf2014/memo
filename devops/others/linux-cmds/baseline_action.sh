@@ -72,6 +72,8 @@ echo "已启用SSH会话超时"
 else
 echo -e "TMOUT=300\nreadonly TMOUT\nexport TMOUT" >> /etc/profile
 fi
+cat /etc/ssh/sshd_config | grep -q "^ClientAliveInterval" || echo "ClientAliveInterval 300" >> /etc/ssh/sshd_config
+cat /etc/ssh/sshd_config | grep -q "^ClientAliveCountMax" || echo "ClientAliveCountMax 0" >> /etc/ssh/sshd_config
 echo ----------------------------扫描特定的IP连接SSH-------------------------------------
 if more  /etc/ssh/sshd_config | grep AllowUsers ; then
 more  /etc/ssh/sshd_config | grep AllowUsers | tr " " "\n" | awk  '(NR!=1){print  "地址" $1}'
