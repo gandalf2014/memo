@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue Demo</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="hello-vue" class="demo">
+        <h1>{{ message }}</h1>
+        username:<input type="text" v-model="user.name" />
+        <br />
+        password:<input type="password" v-model="user.password" />
+        <p>
+            you typed name is : {{user.name}}
+        </p>
+        <button type="button" @click="alert(count++)">button clicked {{count}} times</button>
+        button:<input type="button" value="click ME!" @click="clickme">
+        <h2 v-show="ok">message shows here{{1+23}}</h2>
+        <HelloTest></HelloTest>
+    </div>
+
+
+    <script>
+        const HelloVueApp = {
+            data() {
+                return {
+                    message: 'Hello Vue!!1231',
+                    user: {
+                        name: "gandalf",
+                        password: "admin"
+                    },
+                    ok: true,
+                    count: 1
+                }
+            },
+
+            methods: {
+                clickme: function () {
+                    //alert("clicked");
+                    this.ok = !this.ok;
+                    console.log(this.ok);
+                },
+                alert: function (count) {
+                    alert("button clicked here" + count + "times");
+                }
+            },
+
+
+
+        }
+
+
+        const HelloTest = {
+            data(){
+                return {age:20,title:"a simple title"}
+            },
+            template: `<h1>you age is {{age}} , {{title}}</h1>`
+        }
+
+        const app = Vue.createApp(HelloTest);
+        app.component("HelloTest",{
+            props:['title','age'],
+            
+        });
+        app.mount("#hello-vue");
+    </script>
+</body>
+
+</html>
